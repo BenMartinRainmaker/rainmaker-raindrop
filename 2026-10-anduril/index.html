@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Raindrop of the Month · October 2026 · Anduril</title>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  /* ===== BRAND COLORS: change here and everything follows ===== */
+  :root{
+    --bg:#eef5fb; --border:#dde5ee; --ink:#1b1f24; --ink-2:#3d444d; --muted:#6b7480;
+    --navy:#10305f; --navy-deep:#061530; --gold:#b48a2f; --gold-bright:#d4af37; --rain:#2f7fc0;
+  }
+  @page{ size:letter; margin:0; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ background:#dfe7ef; height:100%; overflow:hidden; }
+  body{ font-family:"Jost",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .page{ width:8.5in; height:11in; margin:0 auto; background:var(--bg); position:relative; overflow:hidden; display:flex; flex-direction:column; transform-origin:top center; box-shadow:0 10px 40px rgba(6,21,48,.18); }
+  @media print{ html,body{ background:#fff; overflow:visible; height:auto; } .page{ transform:none !important; box-shadow:none; } .nav,.dots{ display:none !important; } }
+
+  /* header */
+  .bar{ height:.8in; flex-shrink:0; padding:0 .5in; display:grid; grid-template-columns:1fr auto 1fr; column-gap:14px; align-items:center; background:var(--navy-deep); border-bottom:2px solid var(--gold-bright); }
+  .brand{ display:flex; align-items:center; gap:9px; }
+  .brand svg{ width:.36in; height:.36in; filter:drop-shadow(0 0 3px rgba(243,220,126,.45)); }
+  .brand-seal{ width:35px; height:35px; overflow:hidden; flex:none; position:relative; }
+  .brand-seal img{  position:absolute; height:39px; width:auto; max-width:none; left:-2px; top:-2px; }
+  .brand .wm small{ display:block; font-size:7pt; letter-spacing:.28em; line-height:1.2; margin-top:2px; }
+  .brand .wm{ font-family:"Jost",sans-serif; color:#fff; font-weight:600; letter-spacing:.22em; font-size:10.5pt; }
+
+  .bar .issue{ display:flex; align-items:center; justify-content:center; gap:9px; color:#fff; font-size:10pt; letter-spacing:.09em; white-space:nowrap; font-weight:600; }
+  .hero .issue{ display:flex; align-items:center; gap:8px; font-size:16pt; line-height:1.2; letter-spacing:.025em; white-space:nowrap; color:var(--navy); font-weight:600; margin-bottom:8px; }
+  .issue .mini-drop{ flex:none; width:13px; height:19px; filter:drop-shadow(0 0 4px rgba(97,196,249,.35)); }
+  .bar .date{ font-size:8pt; letter-spacing:.15em; white-space:nowrap; text-transform:uppercase; color:#fff; font-weight:600; text-align:right; }
+
+  .scroll{ display:contents; }
+  .content{ padding:.16in .5in .12in; flex:1; display:flex; flex-direction:column; gap:.12in; }
+
+  /* hero */
+  .hero{ display:grid; grid-template-columns:1.6in 1fr; gap:.25in; align-items:center; padding-bottom:.1in; border-bottom:1px solid #b7cbdc; }
+  .drop{ width:1.6in; height:1.7in; }
+  .drop svg{ width:100%; height:100%; display:block; overflow:visible; }
+  .hero h1{ font-size:36pt; font-weight:700; line-height:1; color:var(--navy-deep); }
+  .hero .sub{ font-size:12.5pt; color:var(--navy-deep); margin-top:3px; font-weight:500; letter-spacing:.01em; }
+  .intro p{ font-size:9.2pt; line-height:1.42; color:var(--ink-2); margin-top:.09in; }
+  .intro .intro-publisher{ display:inline-block; font-family:"Jost",sans-serif; font-size:15pt; font-weight:600; letter-spacing:0; text-transform:none; color:var(--navy); }
+  .intro p b{ color:var(--navy-deep); font-weight:600; }
+  .chips{ display:flex; flex-wrap:wrap; gap:5px; margin-top:.09in; }
+  .chip{ font-size:7.4pt; letter-spacing:.06em; text-transform:uppercase; padding:3px 9px; border-radius:999px; border:1px solid #cfd9e4; background:#fff; color:var(--ink-2); }
+  .chip b{ color:var(--navy-deep); font-weight:600; }
+
+  /* stats: one quiet line */
+  .stats{ display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:.06in 0; }
+  .stat{ padding:0 .16in; border-right:1px solid var(--border); }
+  .stat:first-child{ padding-left:0; } .stat:last-child{ border-right:0; }
+  .stat .n{ font-size:18pt; font-weight:600; color:var(--navy-deep); line-height:1.05; }
+  .stat .l{ font-size:7.8pt; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-top:2px; }
+  .stat .s{ font-size:8pt; color:var(--ink-2); }
+
+  h2{ font-size:8pt; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:.06in; }
+
+  /* photos + products */
+  .mid{ display:grid; grid-template-columns:3.35in 1fr; gap:.22in; }
+  .photo{ position:relative; border-radius:8px; overflow:hidden; background:#000; box-shadow:0 2px 10px rgba(6,21,48,.15); }
+  .photo img{ position:absolute; top:0; left:0; inset:0; width:100%; height:100%; object-fit:cover; display:block; opacity:0; transition:opacity .35s; }
+  .photo img.on{ opacity:1; }
+  .photo .cap{ position:absolute; left:0; right:0; bottom:0; padding:.25in .14in .1in; font-size:7.8pt; color:#fff; background:linear-gradient(180deg,rgba(6,21,48,0),rgba(6,21,48,.9)); line-height:1.3; }
+  .photo .cap b{ font-weight:600; color:#f3dc7e; }
+  .photo .cap span{ display:none; } .photo .cap span.on{ display:inline; }
+  .nav{ position:absolute; top:50%; transform:translateY(-50%); width:.3in; height:.3in; border-radius:50%; border:1px solid rgba(255,255,255,.6); background:rgba(6,21,48,.55); color:#fff; display:flex; align-items:center; justify-content:center; font-size:12pt; cursor:pointer; user-select:none; z-index:2; }
+  .nav:hover{ background:rgba(6,21,48,.9); }
+  .nav.prev{ left:.1in; } .nav.next{ right:.1in; }
+  .dots{ position:absolute; top:.1in; right:.12in; display:flex; gap:5px; z-index:2; }
+  .dots i{ width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,.5); display:block; }
+  .dots i.on{ background:var(--gold-bright); }
+
+  .builds{ display:grid; grid-template-columns:1fr 1fr; gap:.08in .16in; }
+  .item{ display:flex; gap:8px; align-items:flex-start; }
+  .item .ic{ flex:0 0 .3in; width:.3in; height:.3in; border-radius:6px; background:var(--navy-deep); display:flex; align-items:center; justify-content:center; margin-top:1px; }
+  .item .ic svg{ width:.2in; height:.2in; stroke:var(--gold-bright); fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+  .item .t{ font-size:9.6pt; font-weight:600; color:var(--navy-deep); line-height:1.2; }
+  .item .d{ font-size:7.8pt; color:var(--ink-2); line-height:1.3; margin-top:1px; }
+
+  /* lattice */
+  .lattice{ background:var(--navy-deep); color:#fff; border-radius:8px; padding:.1in .2in; display:grid; grid-template-columns:auto 1fr; gap:.2in; align-items:center; }
+  .lattice svg{ width:.6in; height:.6in; }
+  .lattice .t{ font-size:11pt; font-weight:600; color:#d4ad62; }
+  .lattice .d{ font-size:8.3pt; line-height:1.36; color:#dbe7f5; margin-top:2px; }
+
+  /* timeline */
+  .tl{ display:grid; grid-template-columns:repeat(4,1fr); gap:.18in; }
+  .tl .m{ font-size:8pt; font-weight:600; letter-spacing:.16em; color:var(--gold); }
+  .tl .x{ font-size:7.9pt; color:var(--ink-2); line-height:1.33; margin-top:2px; }
+
+  /* footer */
+  .foot{ margin-top:auto; background:var(--navy-deep); color:#fff; padding:.25in .5in .23in; border-top:2px solid var(--gold-bright); }
+  .foot .row{ display:flex; align-items:center; justify-content:space-between; gap:.3in; }
+  .foot .say{ font-size:9pt; line-height:1.4; color:#dbe7f5; max-width:4.9in; }
+  .foot .say b{ color:#fff; font-weight:600; }
+  .pill{ display:flex; align-items:center; gap:8px; white-space:nowrap; background:#fff; color:var(--navy-deep); font-weight:600; font-size:9pt; letter-spacing:.04em; padding:.08in .18in .08in .14in; border-radius:999px; }
+  .pill svg{ width:.22in; height:.22in; }
+  .pill span b{ color:var(--gold); }
+  .fine{ font-size:6.3pt; color:#61718a; line-height:1.35; margin-top:.08in; }
+
+  .brand .wm{ font-family:"Jost",sans-serif; font-weight:600; letter-spacing:.15em; line-height:1.12; color:#fff; }
+  .brand .wm small{ color:#fff; }
+  .brand-seal img{ width:100%; height:100%; top:0; left:0; object-fit:contain; }
+  .bar .issue{ font-family:"Jost",sans-serif; font-size:13pt; letter-spacing:.015em; }
+  .hero{ grid-template-columns:1.6in minmax(0,1fr) 1.6in; }
+  .hero::after{ content:""; }
+  .company-title{ text-align:center; min-width:0; }
+  .anduril-wordmark{ width:100%; max-width:320px; height:auto; display:block; margin:0 auto; }
+  @media print{
+    .bar{ height:.7in; }
+    .intro .intro-publisher{ color:var(--navy); }
+    .content{ gap:.06in; padding-top:.1in; }
+    .hero{ grid-template-columns:1.25in minmax(0,1fr) 1.25in; }
+    .drop{ width:1.15in; height:1.2in; }
+    .intro p{ font-size:9pt; line-height:1.35; }
+    .foot{ flex-shrink:0; }
+  }
+  /* Readable screen edition: the trade bar stays pinned; the header scrolls away with the content. */
+  @media screen{
+    html,body{ width:100%; height:100%; overflow:hidden; }
+    .page{ width:100%; max-width:1280px; height:100vh; height:100dvh; display:grid; grid-template-rows:minmax(0,1fr) auto; transform:none; }
+    .scroll{ display:flex; flex-direction:column; min-height:0; overflow-y:auto; overscroll-behavior:contain; scrollbar-gutter:stable; }
+    .bar{ flex-shrink:0; }
+    .bar{ height:96px; padding:0 32px; gap:22px; }
+    .brand{ gap:13px; }
+    .brand-seal{ width:47px; height:48px; }
+    .brand-seal img{ height:100%; left:0; top:0; }
+    .brand .wm{ font-size:21px; letter-spacing:.15em; }
+    .brand .wm small{ font-size:10px; margin-top:5px; letter-spacing:.3em; }
+    .bar .issue{ font-size:25px; letter-spacing:.01em; }
+    .bar .date{ font-size:12px; }
+    .content{ padding:20px 32px 24px; gap:18px; }
+    .content>*{ flex-shrink:0; }
+    .hero{ grid-template-columns:170px minmax(0,1fr) 170px; gap:28px; padding-bottom:16px; }
+    .drop{ width:160px; height:175px; }
+    .hero .issue{ font-size:23px; margin-bottom:9px; }
+    .hero h1{ line-height:1; }
+    .anduril-wordmark{ max-width:420px; }
+    .hero .sub{ font-size:18px; margin-top:6px; }
+    .intro .intro-publisher{ font-size:26px; }
+    .intro p{ font-size:16px; line-height:1.5; margin-top:0; }
+    .chips{ margin-top:12px; gap:7px; }
+    .chip{ font-size:11px; padding:4px 10px; }
+    .stats{ padding:12px 0; }
+    .stat .n{ font-size:30px; }
+    .stat .l{ font-size:11px; margin-top:4px; }
+    .stat .s{ font-size:13px; margin-top:3px; }
+    h2{ font-size:12px; margin-bottom:10px; }
+    .mid{ grid-template-columns:minmax(0,.95fr) minmax(0,1.2fr); gap:26px; }
+    .photo{ min-height:230px; height:300px; }
+    @supports (aspect-ratio:1){ .photo{ height:auto; } }
+    .photo .cap{ font-size:12px; padding:32px 14px 12px; }
+    .nav{ width:36px; height:36px; font-size:22px; }
+    .builds{ gap:16px; }
+    .item .t{ font-size:15px; }
+    .item .d{ font-size:14px; line-height:1.4; margin-top:3px; }
+    .lattice{ padding:16px 22px; }
+    .lattice .t{ font-size:17px; }
+    .lattice .d{ font-size:14px; line-height:1.5; }
+    .tl{ gap:22px; }
+    .tl .m{ font-size:12px; }
+    .tl .x{ font-size:14px; line-height:1.45; margin-top:4px; }
+    .fine{ font-size:11px; line-height:1.45; margin-top:0; }
+    .foot{ margin:0; padding:40px 32px max(40px,env(safe-area-inset-bottom)); box-shadow:0 -5px 20px rgba(6,21,48,.1); z-index:2; }
+    .foot .say{ font-size:14px; max-width:800px; }
+    .pill{ font-size:14px; padding:11px 17px; }
+  }
+  @media screen and (max-width:900px){
+    /* Phones and tablets: let the document scroll normally (iOS Safari clips fixed-height
+       inner scrollers behind its toolbar) and keep the trade bar sticky at the bottom. */
+    html,body{ overflow:visible; height:auto; }
+    .page{ height:auto; min-height:100vh; min-height:100dvh; display:flex; flex-direction:column; overflow:visible; }
+    .scroll{ display:contents; }
+    .content{ overflow:visible; }
+    .foot{ position:sticky; bottom:0; }
+    .bar{ height:112px; grid-template-columns:1fr auto; gap:10px 20px; padding:16px 24px; }
+    .bar .date{ grid-column:2; grid-row:1; }
+    .bar .issue{ grid-column:1 / -1; grid-row:2; font-size:23px; }
+    .hero{ grid-template-columns:140px minmax(0,1fr) 140px; }
+    .drop{ width:130px; height:150px; }
+    .content{ padding:18px 24px 24px; }
+    .mid{ grid-template-columns:1fr; }
+    .photo{ aspect-ratio:16/7; min-height:220px; }
+    .tl{ grid-template-columns:1fr 1fr; }
+    .foot{ padding-inline:24px; }
+    .foot .say{ font-size:13px; }
+  }
+  @media screen and (max-width:600px){
+    .intro .intro-publisher{ font-size:19px; letter-spacing:0; }
+    .bar{ height:112px; padding:14px 16px; }
+    .brand{ gap:9px; }
+    .brand-seal{ width:36px; height:38px; }
+    .brand-seal img{ height:100%; left:0; top:0; }
+    .brand .wm{ font-size:16px; }
+    .brand .wm small{ font-size:8px; }
+    .bar .date{ font-size:10px; letter-spacing:.08em; }
+    .bar .issue{ font-size:19px; }
+    .content{ padding:16px; gap:18px; }
+    .hero{ grid-template-columns:100px minmax(0,1fr); gap:14px; }
+    .hero::after{ display:none; }
+    .drop{ width:100px; height:120px; }
+    .hero .issue{ font-size:14px; white-space:normal; margin-bottom:6px; }
+    .hero .issue .mini-drop{ display:none; }
+    .anduril-wordmark{ max-width:260px; }
+    .hero .sub{ font-size:14px; line-height:1.35; }
+    .intro p{ font-size:16px; line-height:1.55; }
+    .stats{ grid-template-columns:1fr 1fr; padding:0; }
+    .stat,.stat:first-child{ padding:12px; }
+    .stat:nth-child(2){ border-right:0; }
+    .stat:nth-child(-n+2){ border-bottom:1px solid var(--border); }
+    .photo{ aspect-ratio:4/3; min-height:0; }
+    .builds{ grid-template-columns:1fr; gap:16px; }
+    .item .d{ font-size:14px; }
+    .lattice{ grid-template-columns:1fr; gap:10px; padding:18px; }
+    .lattice svg{ width:36px; height:36px; }
+    .foot{ padding:28px 16px max(28px,env(safe-area-inset-bottom)); }
+    .foot .row{ flex-direction:column; align-items:stretch; gap:10px; }
+    .foot .say{ font-size:12px; line-height:1.4; }
+    .pill{ align-self:center; padding:9px 16px; font-size:13px; }
+  }
+  @media screen and (max-height:500px) and (min-width:601px){
+    .bar{ height:72px; }
+    .foot{ padding-block:22px; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="rxg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff4c2"/><stop offset=".25" stop-color="#f3dc7e"/><stop offset=".5" stop-color="#d4af37"/><stop offset=".72" stop-color="#b8912e"/><stop offset=".9" stop-color="#e9cf6c"/><stop offset="1" stop-color="#fff4c2"/>
+    </linearGradient>
+    <clipPath id="rxc"><rect x="0" y="0" width="300" height="279"/></clipPath>
+    <linearGradient id="mini-water" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e1f8ff"/><stop offset=".45" stop-color="#64c8f5"/><stop offset="1" stop-color="#1764ad"/></linearGradient>
+    <symbol id="mini-drop" viewBox="0 0 20 28"><path d="M10 1C8 5 2 13 2 18a8 8 0 0 0 16 0C18 13 12 5 10 1Z" fill="url(#mini-water)" stroke="#e9cf6c" stroke-width=".8"/><path d="M8 9c-2 3-4 6-4 9" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".8"/></symbol>
+    <symbol id="rmark" viewBox="0 0 300 290"><g clip-path="url(#rxc)" fill="none" stroke="url(#rxg)" stroke-width="15" stroke-linejoin="miter" stroke-linecap="butt"><path d="M290 296L5 12H186a72 72 0 0 1 0 144h-12"/><path d="M14 82h52l178 178"/><path d="M30 152h52l128 128"/></g></symbol>
+  </defs>
+</svg>
+<div class="page">
+
+  <!-- ===== 1. HEADER BAR (brand mark, title, month) ===== -->
+  <!-- Official mark source: https://images.squarespace-cdn.com/content/v1/58b86940579fb3c2d7279866/1586386049680-KV0NSGFO6VU8LBV2M0B9/Logo_color.png -->
+  <div class="scroll"><!-- header + content scroll together on screen; footer stays pinned -->
+  <div class="bar">
+    <div class="brand"><span class="brand-seal"><img src="assets/rainmaker_official_gold.svg" alt="Rainmaker Securities logo"></span><div class="wm">RAINMAKER<small>SECURITIES</small></div></div>
+    <div class="issue"><span>Raindrop of the Month</span></div>
+    <div class="date">October 2026</div>
+  </div>
+
+  <main class="content" tabindex="0" aria-label="Anduril company profile">
+
+    <!-- Official Anduril wordmark: https://www.anduril.com/assets/images/icons/anduril-logo.xxbmzmKB-d.svg -->
+    <!-- ===== 2. HERO: raindrop + company name, subtitle, intro, chips ===== -->
+    <div class="hero">
+      <div class="drop">
+        <svg viewBox="0 0 140 160" role="img" aria-label="Glass-blue raindrop with the Anduril logo, October 2026">
+          <defs>
+            <path id="water-shape" d="M70 5C61 24 20 65 20 99a50 50 0 0 0 100 0C120 65 79 24 70 5Z"/>
+            <radialGradient id="body" cx="31%" cy="29%" r="83%"><stop stop-color="#e3faff"/><stop offset=".28" stop-color="#91dcf8"/><stop offset=".56" stop-color="#3ba6dd"/><stop offset=".82" stop-color="#1266aa"/><stop offset="1" stop-color="#062d63"/></radialGradient>
+            <linearGradient id="glass-edge" x1="0" y1="0" x2="1" y2=".7"><stop stop-color="#fff" stop-opacity=".9"/><stop offset=".45" stop-color="#b8edff" stop-opacity=".1"/><stop offset="1" stop-color="#82ddff" stop-opacity=".8"/></linearGradient>
+            <linearGradient id="gloss" x1="0" y1="0" x2=".6" y2="1"><stop stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+            <radialGradient id="refraction"><stop stop-color="#b4f6ff" stop-opacity=".8"/><stop offset="1" stop-color="#6edbff" stop-opacity="0"/></radialGradient>
+            <filter id="sh" x="-35%" y="-20%" width="170%" height="165%"><feDropShadow dx="0" dy="7" stdDeviation="6" flood-color="#0b5999" flood-opacity=".28"/></filter>
+            <clipPath id="clip"><use href="#water-shape"/></clipPath>
+          </defs>
+          <use href="#water-shape" fill="url(#body)" stroke="url(#rxg)" stroke-width="1.5" filter="url(#sh)"/>
+          <g clip-path="url(#clip)">
+            <ellipse cx="76" cy="132" rx="42" ry="20" fill="url(#refraction)"/>
+            <path d="M66 20C56 40 30 66 28 91C27 104 32 110 39 105C44 100 43 84 49 65C55 47 64 33 66 20Z" fill="url(#gloss)"/>
+            <path d="M75 25C88 46 112 77 113 99C115 122 98 141 78 144" fill="none" stroke="url(#glass-edge)" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M30 114C38 138 65 148 88 137" fill="none" stroke="#b6f2ff" stroke-width="1.3" opacity=".65" stroke-linecap="round"/>
+            <path d="M32 72C37 57 47 43 54 34" fill="none" stroke="#fff" stroke-width="2" opacity=".85" stroke-linecap="round"/>
+            <ellipse cx="36" cy="113" rx="2.4" ry="3.8" fill="#e5faff" opacity=".7" transform="rotate(-25 36 113)"/>
+          </g>
+          <image href="assets/anduril_icon_navy.png" x="46" y="74" width="48" height="48"/>
+          <text x="70" y="132" text-anchor="middle" fill="#061530" font-family="Jost, sans-serif" font-size="7" font-weight="600" letter-spacing="1.1">OCT 2026</text>
+        </svg>
+      </div>
+      <div class="company-title">
+        <h1><img class="anduril-wordmark" src="assets/anduril_official_wordmark.svg" alt="Anduril"></h1>
+        <div class="sub">Robotic Defense and AI Command Systems</div>
+      </div>
+    </div>
+    <div class="intro">
+        <p>Rainmaker Securities presents Anduril as the October 2026 Raindrop of the Month! At just nine years old, Anduril is making Terminator a reality with AI-piloted drones, autonomous machines, and Lattice: the AI commander of the robot army. Amongst all the speculation about modern warfare's future, Anduril has become one of the most requested names on our desk.</p>
+        <div class="chips">
+          <span class="chip"><b>Sector</b> &nbsp;Defense technology · AI</span>
+          <span class="chip"><b>Stage</b> &nbsp;Series H · $61B</span>
+          <span class="chip"><b>HQ</b> &nbsp;Costa Mesa, CA</span>
+          <span class="chip"><b>Founded</b> &nbsp;2017</span>
+          <span class="chip"><b>CEO</b> &nbsp;Brian Schimpf</span>
+        </div>
+    </div>
+
+    <!-- ===== 3. KEY NUMBERS (four stats) ===== -->
+    <div class="stats">
+      <div class="stat"><div class="n">$61B</div><div class="l">Valuation</div><div class="s">Series H, May 2026</div></div>
+      <div class="stat"><div class="n">$5.0B</div><div class="l">Last raise</div><div class="s">Thrive Capital, Andreessen Horowitz</div></div>
+      <div class="stat"><div class="n">$2.2B</div><div class="l">2025 revenue</div><div class="s">Up 120% year over year</div></div>
+      <div class="stat"><div class="n">$20B</div><div class="l">Army contract</div><div class="s">10-year ceiling, March 2026</div></div>
+    </div>
+
+    <!-- ===== 4. PHOTO CAROUSEL (left) + WHAT IT BUILDS (right) =====
+         To add a photo: add an <img>, a <span> caption in the same position, and an <i></i> dot. -->
+    <div class="mid">
+      <div class="photo">
+        <img class="on" src="assets/fury_amraam.jpg" alt="YFQ-44A Fury firing an AIM-120">
+        <img src="assets/lattice_screen.jpg" alt="Lattice command screen on a wall display">
+        <img src="assets/anvil_launch.jpg" alt="Anvil interceptor launching" style="object-position:50% 40%">
+        <img src="assets/falcon9_transporter17.jpg" alt="Falcon 9 launch carrying Anduril-26" style="object-position:50% 60%">
+        <img src="assets/ghostx_flight.jpg" alt="Ghost-X drone in flight" style="object-position:60% 40%">
+        <img src="assets/sentry_b52.jpg" alt="Sentry sensor head with a B-52 behind">
+        <img src="assets/dive_ld_crop.jpg" alt="Dive-LD autonomous submarine" style="object-position:50% 100%">
+        <div class="nav prev" onclick="slide(-1)">&#8249;</div>
+        <div class="nav next" onclick="slide(1)">&#8250;</div>
+        <div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="cap">
+          <span class="on"><b>Live fire.</b> A YFQ-44A Fury fires an AIM-120 AMRAAM over the Mojave Desert, July 2026. The first missile shot by any U.S. drone of its class. U.S. Air Force photo.</span>
+          <span><b>Lattice.</b> The command screen on the wall during an Air Force Advanced Battle Management System demo, tracking Anduril sentry towers across White Sands, September 2020. U.S. Air Force photo.</span>
+          <span><b>Anvil.</b> Anduril's interceptor drone leaving its launch box to run down a hostile drone at Minot AFB, October 2025. DoD photo.</span>
+          <span><b>Anduril-26.</b> The company's first satellite rode this Falcon 9 out of Vandenberg on July 7, 2026. It is now tasked from orbit through Lattice. U.S. Space Force photo.</span>
+          <span><b>Ghost-X.</b> Anduril's autonomous reconnaissance drone on its first National Guard flights, New Jersey, September 2026. U.S. Army photo.</span>
+          <span><b>Sentry.</b> The sensor head of Anduril's counter-drone sentry scanning the Minot flightline as a B-52 climbs out, October 2025. DoD photo.</span>
+          <span><b>Dive-LD.</b> Anduril's autonomous submarine going into the water at the Navy's Keyport, Washington range. U.S. Navy photo.</span>
+        </div>
+      </div>
+      <div>
+        <h2>What they build</h2>
+        <div class="builds">
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 14-9-3-9 3z"/><path d="M12 14v6"/></svg></div><div><div class="t">Autonomous aircraft</div><div class="d">Fury flies as a wingman to F-35s. Ghost and Altius handle strike and reconnaissance.</div></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c3 3 4 8 4 12l-4 4-4-4c0-4 1-9 4-12z"/><path d="M8 14l-3 2 2 3M16 14l3 2-2 3"/></svg></div><div><div class="t">Missiles &amp; interceptors</div><div class="d">Barracuda cruise missiles built for mass production. Roadrunner, a reusable jet interceptor.</div></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21V9"/><path d="M8 21h8"/><path d="M7 7a7 7 0 0 1 10 0"/><path d="M4 4a11 11 0 0 1 16 0"/><circle cx="12" cy="9" r="1.5"/></svg></div><div><div class="t">Sensors &amp; scanners</div><div class="d">Sentry towers and Wisp cameras watch borders and bases and flag threats on their own.</div></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 8v5M9.5 11.5L12 13l2.5-1.5"/></svg></div><div><div class="t">Air defense &amp; tracking</div><div class="d">Anvil rams hostile drones out of the sky. Pulsar jams them. Both fielded with U.S. forces.</div></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 13c3-5 7-5 9 0s6 5 9 0"/><path d="M6 8l5 2 6-2-2 4"/><path d="M10 5v3"/></svg></div><div><div class="t">Undersea &amp; surface</div><div class="d">Ghost Shark and Dive-LD autonomous submarines. Unmanned surface vessels with HD Hyundai.</div></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 16 0v3H4z"/><path d="M4 15h16M9 15v3h6v-3"/><path d="M14 10h3"/></svg></div><div><div class="t">Soldier systems</div><div class="d">EagleEye, the mixed-reality helmet program taken over from Microsoft.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 5. FEATURE BAND (navy): the one thing to remember about the company ===== -->
+    <div class="lattice">
+      <svg viewBox="0 0 60 60" fill="none" stroke="#d4af37" stroke-width="1.4">
+        <circle cx="30" cy="30" r="5" fill="#d4af37"/>
+        <circle cx="10" cy="14" r="3"/><circle cx="50" cy="12" r="3"/><circle cx="8" cy="44" r="3"/><circle cx="52" cy="46" r="3"/><circle cx="30" cy="8" r="3"/><circle cx="30" cy="52" r="3"/>
+        <path d="M30 30L10 14M30 30L50 12M30 30L8 44M30 30L52 46M30 30V8M30 30V52" opacity=".7"/>
+        <path d="M10 14L30 8L50 12M8 44L30 52L52 46" opacity=".35"/>
+      </svg>
+      <div>
+        <div class="t">Lattice: AI central command</div>
+        <div class="d">Every Anduril system reports into Lattice: a singular AI command and control platform (the AI general of the army). Lattice processes all these feeds at once, calculates, and directs thousands of machines simultaneously to do its bidding in real time.</div>
+      </div>
+    </div>
+
+    <!-- ===== 6. TIMELINE (four columns) ===== -->
+    <div>
+      <h2>2026 so far</h2>
+      <div class="tl">
+        <div><div class="m">MARCH</div><div class="x">Army signs a ten-year enterprise contract with a $20B ceiling, replacing more than 120 separate procurements. Fury production begins at Arsenal-1 in Ohio.</div></div>
+        <div><div class="m">MAY</div><div class="x">$5B Series H closes at a $61B valuation, led by Thrive Capital and Andreessen Horowitz. Roughly double the June 2025 round.</div></div>
+        <div><div class="m">JULY</div><div class="x">Fury fires a live AIM-120 AMRAAM. First Ohio-built aircraft rolls out three months early. Reuters reports talks for a round near $100B, unconfirmed.</div></div>
+        <div><div class="m">SEPTEMBER</div><div class="x">Fury flies in formation with F-35s, and the Air Force now flies one daily from Creech. Roadrunner and Barracuda join the Ohio line by year end.</div></div>
+      </div>
+    </div>
+
+    <div class="fine">Rainmaker Securities, LLC. For informational purposes only. Not an offer to buy or sell any security, not a recommendation, and not investment advice. Figures from public reporting as of October 2026. Private securities are illiquid and speculative. rainmakersecurities.com</div>
+  </main>
+
+  <!-- ===== 7. FOOTER (navy): call to action + disclaimer ===== -->
+  </div><!-- /scroll -->
+  <div class="foot">
+    <div class="row">
+      <div class="say"><b>Holding Anduril or wanting to buy?</b> Rainmaker Securities brokers private shares in Anduril and other late-stage companies. Reach out to your representative, or place an order on our exchange.</div>
+      <div class="pill"><svg><use href="#rmark"/></svg><span>Trade on <b>Rainmaker-X</b></span></div>
+    </div>
+
+  </div>
+
+</div>
+<!-- ===== SCRIPTS: carousel. Screen layout uses a scrollable content region and persistent header/footer. ===== -->
+<script>
+  let i=0; const imgs=document.querySelectorAll('.photo img'), caps=document.querySelectorAll('.photo .cap span'), dots=document.querySelectorAll('.dots i');
+  function slide(d){ i=(i+d+imgs.length)%imgs.length; [imgs,caps,dots].forEach(l=>l.forEach((e,k)=>e.classList.toggle('on',k===i))); }
+  document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight')slide(1); if(e.key==='ArrowLeft')slide(-1); });
+  let tx=null; const ph=document.querySelector('.photo');
+  ph.addEventListener('touchstart',e=>{ tx=e.touches[0].clientX; },{passive:true});
+  ph.addEventListener('touchend',e=>{ if(tx===null)return; const dx=e.changedTouches[0].clientX-tx; tx=null; if(Math.abs(dx)>40)slide(dx<0?1:-1); },{passive:true});
+
+
+</script>
+</body>
+</html>
