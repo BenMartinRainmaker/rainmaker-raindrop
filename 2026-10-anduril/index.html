@@ -118,32 +118,32 @@
   .company-title{ text-align:center; min-width:0; }
   .anduril-wordmark{ width:100%; max-width:320px; height:auto; display:block; margin:0 auto; }
   @media print{
-    .bar{ height:.7in; }
+    .bar{ height:.62in; }
     .intro .intro-publisher{ color:var(--navy); }
-    .content{ gap:.06in; padding-top:.1in; }
-    .hero{ grid-template-columns:1.25in minmax(0,1fr) 1.25in; }
-    .drop{ width:1.15in; height:1.2in; }
+    .content{ gap:.05in; padding-top:.08in; }
+    .hero{ grid-template-columns:1.15in minmax(0,1fr) 1.15in; padding-bottom:.06in; }
+    .drop{ width:1.05in; height:1.1in; }
     .intro p{ font-size:9pt; line-height:1.35; }
     .foot{ flex-shrink:0; }
     /* Let real overflow spill to a second page so render.sh's one-page check catches it,
        instead of the page box silently clipping the footer. */
     .page{ overflow:visible; height:auto; min-height:11in; }
-    .mid{ align-items:start; grid-template-columns:3in 1fr; gap:.16in; }
+    .mid{ align-items:start; grid-template-columns:2.75in 1fr; gap:.15in; }
     .photo{ height:2.05in; box-shadow:none; }
     .item .t{ font-size:9pt; }
     .item ul{ margin-top:1px; padding-left:.1in; }
-    .item li{ font-size:7.2pt; line-height:1.25; margin-top:0; }
+    .item li{ font-size:7pt; line-height:1.22; margin-top:0; }
     .left{ gap:.08in; }
     .more li{ font-size:7pt; line-height:1.25; margin-top:0; white-space:nowrap; }
     .more ul{ padding-left:.1in; }
-    .builds{ gap:.05in .12in; }
+    .builds{ gap:.04in .1in; }
     .chip{ font-size:7pt; padding:2px 8px; }
-    .intro p{ font-size:8.8pt; line-height:1.33; }
+    .intro p{ font-size:8.7pt; line-height:1.32; margin-top:.06in; }
     .stat .n{ font-size:17pt; }
-    .lattice{ padding:.08in .18in; } .lattice .d{ font-size:8pt; line-height:1.3; }
-    .tl .x{ font-size:7.6pt; line-height:1.3; }
-    .fine{ margin-top:.05in; }
-    .foot{ padding:.18in .5in .16in; }
+    .lattice{ padding:.07in .18in; } .lattice .d{ font-size:7.9pt; line-height:1.28; }
+    .tl .x{ font-size:7.5pt; line-height:1.28; }
+    .fine{ margin-top:.04in; }
+    .foot{ padding:.15in .5in .14in; }
   }
   /* Readable screen edition: the trade bar stays pinned; the header scrolls away with the content. */
   @media screen{
@@ -177,7 +177,8 @@
     .stat .s{ font-size:13px; margin-top:3px; }
     h2{ font-size:12px; margin-bottom:10px; }
     .mid{ grid-template-columns:minmax(0,.95fr) minmax(0,1.2fr); gap:26px; }
-    .mid{ align-items:start; }
+    .mid{ align-items:stretch; }
+    .left .photo{ flex:1; }
     .photo{ min-height:230px; height:300px; }
     @supports (aspect-ratio:1){ .photo{ height:auto; } }
     .photo .cap{ font-size:12px; padding:32px 14px 12px; }
@@ -278,7 +279,7 @@
   <!-- Official mark source: https://images.squarespace-cdn.com/content/v1/58b86940579fb3c2d7279866/1586386049680-KV0NSGFO6VU8LBV2M0B9/Logo_color.png -->
   <div class="scroll"><!-- header + content scroll together on screen; footer stays pinned -->
   <div class="bar">
-    <div class="brand"><span class="brand-seal"><img src="assets/rainmaker_official_gold.svg?v=1791402525" alt="Rainmaker Securities logo"></span><div class="wm">RAINMAKER<small>SECURITIES</small></div></div>
+    <div class="brand"><span class="brand-seal"><img src="assets/rainmaker_official_gold.svg?v=1791403033" alt="Rainmaker Securities logo"></span><div class="wm">RAINMAKER<small>SECURITIES</small></div></div>
     <div class="issue"><span>Raindrop of the Month</span></div>
     <div class="date">October 2026</div>
   </div>
@@ -313,7 +314,7 @@
         </svg>
       </div>
       <div class="company-title">
-        <h1><img class="anduril-wordmark" src="assets/anduril_official_wordmark.svg?v=1791402525" alt="Anduril"></h1>
+        <h1><img class="anduril-wordmark" src="assets/anduril_official_wordmark.svg?v=1791403033" alt="Anduril"></h1>
         <div class="sub">Robotic Defense and AI Command Systems</div>
       </div>
     </div>
@@ -341,13 +342,13 @@
     <div class="mid">
       <div class="left">
       <div class="photo">
-        <img class="on" src="assets/fury_amraam.jpg?v=1791402525" alt="YFQ-44A Fury firing an AIM-120">
-        <img src="assets/lattice_screen.jpg?v=1791402525" alt="Lattice command screen on a wall display">
-        <img src="assets/anvil_launch.jpg?v=1791402525" alt="Anvil interceptor launching" style="object-position:50% 40%">
-        <img src="assets/falcon9_transporter17.jpg?v=1791402525" alt="Falcon 9 launch carrying Anduril-26" style="object-position:50% 60%">
-        <img src="assets/ghostx_flight.jpg?v=1791402525" alt="Ghost-X drone in flight" style="object-position:60% 40%">
-        <img src="assets/sentry_b52.jpg?v=1791402525" alt="Sentry sensor head with a B-52 behind">
-        <img src="assets/dive_ld_crop.jpg?v=1791402525" alt="Dive-LD autonomous submarine" style="object-position:50% 100%">
+        <img class="on" src="assets/fury_amraam.jpg?v=1791403033" alt="YFQ-44A Fury firing an AIM-120">
+        <img src="assets/lattice_screen.jpg?v=1791403033" alt="Lattice command screen on a wall display">
+        <img src="assets/anvil_launch.jpg?v=1791403033" alt="Anvil interceptor launching" style="object-position:50% 40%">
+        <img src="assets/falcon9_transporter17.jpg?v=1791403033" alt="Falcon 9 launch carrying Anduril-26" style="object-position:50% 60%">
+        <img src="assets/ghostx_flight.jpg?v=1791403033" alt="Ghost-X drone in flight" style="object-position:60% 40%">
+        <img src="assets/sentry_b52.jpg?v=1791403033" alt="Sentry sensor head with a B-52 behind">
+        <img src="assets/dive_ld_crop.jpg?v=1791403033" alt="Dive-LD autonomous submarine" style="object-position:50% 100%">
         <div class="nav prev" onclick="slide(-1)">&#8249;</div>
         <div class="nav next" onclick="slide(1)">&#8250;</div>
         <div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
@@ -362,28 +363,28 @@
         </div>
       </div>
       <div class="more">
-        <h2>Also in the lineup</h2>
+        <h2>Customers</h2>
         <ul>
-          <li><b>Bolt-M:</b> backpack strike drone, 600+ bought by the Marines.</li>
-          <li><b>Omen:</b> long-range VTOL drone, 50 ordered by the UAE.</li>
-          <li><b>Copperhead:</b> torpedo drone fired from autonomous subs.</li>
-          <li><b>Seabed Sentry:</b> sensor nodes that live on the ocean floor.</li>
-          <li><b>Menace:</b> command center that ships in a container.</li>
-          <li><b>Rocket motors:</b> 6,000 a year from its Mississippi plant.</li>
-          <li><b>Anduril-26:</b> its first satellite, launched July 2026.</li>
-          <li><b>Golden Dome:</b> space-based interceptor prototypes.</li>
+          <li><b>U.S. Army:</b> 10-year Lattice contract, $20B ceiling.</li>
+          <li><b>U.S. Air Force:</b> Fury production for the CCA fleet.</li>
+          <li><b>U.S. Navy:</b> Dive-LD subs, Roadrunner on destroyers.</li>
+          <li><b>U.S. Marines:</b> 600+ Bolt-M strike drones.</li>
+          <li><b>Border Protection:</b> 300+ sentry towers, 200 more ordered.</li>
+          <li><b>Australia:</b> Ghost Shark subs, A$1.7B program.</li>
+          <li><b>Taiwan:</b> 2,000+ Altius drones, deliveries from Q4 2026.</li>
+          <li><b>UAE, Poland, Kuwait:</b> Omen, Barracuda, counter-drone kits.</li>
         </ul>
       </div>
       </div>
       <div>
         <h2>What they build</h2>
         <div class="builds">
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 14-9-3-9 3z"/><path d="M12 14v6"/></svg></div><div><div class="t">Autonomous aircraft</div><ul><li><b>Fury:</b> AI-piloted jet that flies alongside F-35s as a drone wingman.</li><li><b>Ghost:</b> autonomous reconnaissance drone used by the U.S. Army.</li><li><b>Altius:</b> tube-launched drone for strike and reconnaissance.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c3 3 4 8 4 12l-4 4-4-4c0-4 1-9 4-12z"/><path d="M8 14l-3 2 2 3M16 14l3 2-2 3"/></svg></div><div><div class="t">Missiles &amp; interceptors</div><ul><li><b>Barracuda:</b> cruise missile designed for mass production.</li><li><b>Roadrunner:</b> jet-powered interceptor that flies home if it is not used.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21V9"/><path d="M8 21h8"/><path d="M7 7a7 7 0 0 1 10 0"/><path d="M4 4a11 11 0 0 1 16 0"/><circle cx="12" cy="9" r="1.5"/></svg></div><div><div class="t">Sensors &amp; scanners</div><ul><li><b>Sentry towers:</b> autonomous towers that monitor borders and bases.</li><li><b>Wisp:</b> 360-degree infrared camera that identifies threats automatically.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 8v5M9.5 11.5L12 13l2.5-1.5"/></svg></div><div><div class="t">Air defense &amp; tracking</div><ul><li><b>Anvil:</b> interceptor drone that knocks hostile drones out of the sky.</li><li><b>Pulsar:</b> electronic warfare system that jams them. Both are in service with U.S. forces.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 13c3-5 7-5 9 0s6 5 9 0"/><path d="M6 8l5 2 6-2-2 4"/><path d="M10 5v3"/></svg></div><div><div class="t">Underwater vehicles</div><ul><li><b>Ghost Shark:</b> extra-large autonomous submarine for the U.S. and Australian navies.</li><li><b>Dive-LD:</b> long-range autonomous submarine in U.S. Navy service.</li><li><b>Surface vessels:</b> unmanned ships built with HD Hyundai.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 16 0v3H4z"/><path d="M4 15h16M9 15v3h6v-3"/><path d="M14 10h3"/></svg></div><div><div class="t">Soldier systems</div><ul><li><b>EagleEye:</b> the mixed-reality helmet program Anduril took over from Microsoft.</li></ul></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 14-9-3-9 3z"/><path d="M12 14v6"/></svg></div><div><div class="t">Autonomous aircraft</div><ul><li><b>Fury:</b> AI-piloted wingman jet for F-35s.</li><li><b>Ghost:</b> reconnaissance drone used by the U.S. Army.</li><li><b>Altius:</b> tube-launched strike drone.</li><li><b>Bolt-M:</b> backpack strike drone for the Marines.</li><li><b>Omen:</b> long-range VTOL drone unveiled in 2026.</li></ul></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c3 3 4 8 4 12l-4 4-4-4c0-4 1-9 4-12z"/><path d="M8 14l-3 2 2 3M16 14l3 2-2 3"/></svg></div><div><div class="t">Missiles &amp; interceptors</div><ul><li><b>Barracuda:</b> cruise missile built for mass production.</li><li><b>Roadrunner:</b> reusable jet-powered interceptor.</li><li><b>Rocket motors:</b> 6,000 a year from its Mississippi plant.</li></ul></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21V9"/><path d="M8 21h8"/><path d="M7 7a7 7 0 0 1 10 0"/><path d="M4 4a11 11 0 0 1 16 0"/><circle cx="12" cy="9" r="1.5"/></svg></div><div><div class="t">Sensors &amp; scanners</div><ul><li><b>Sentry towers:</b> autonomous border and base towers.</li><li><b>Wisp:</b> infrared camera that spots threats on its own.</li><li><b>Seabed Sentry:</b> sensor nodes on the ocean floor.</li></ul></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 8v5M9.5 11.5L12 13l2.5-1.5"/></svg></div><div><div class="t">Air &amp; space defense</div><ul><li><b>Anvil:</b> drone that rams hostile drones out of the sky.</li><li><b>Pulsar:</b> jammer, in service with U.S. forces.</li><li><b>Golden Dome:</b> space-based interceptor prototypes.</li><li><b>Anduril-26:</b> first satellite, launched July 2026.</li></ul></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 13c3-5 7-5 9 0s6 5 9 0"/><path d="M6 8l5 2 6-2-2 4"/><path d="M10 5v3"/></svg></div><div><div class="t">Underwater vehicles</div><ul><li><b>Ghost Shark:</b> extra-large sub for the U.S. and Australia.</li><li><b>Dive-LD:</b> long-range sub in U.S. Navy service.</li><li><b>Copperhead:</b> torpedo drone fired from autonomous subs.</li><li><b>Surface vessels:</b> unmanned ships built with HD Hyundai.</li></ul></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 16 0v3H4z"/><path d="M4 15h16M9 15v3h6v-3"/><path d="M14 10h3"/></svg></div><div><div class="t">Soldier &amp; command systems</div><ul><li><b>EagleEye:</b> mixed-reality helmet, taken over from Microsoft.</li><li><b>Menace:</b> command center that ships in a container.</li></ul></div></div>
         </div>
       </div>
     </div>
