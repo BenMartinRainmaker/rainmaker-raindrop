@@ -56,6 +56,8 @@
   .stat .n{ font-size:18pt; font-weight:600; color:var(--navy-deep); line-height:1.05; }
   .stat .l{ font-size:7.8pt; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-top:2px; }
   .stat .s{ font-size:8pt; color:var(--ink-2); }
+  .quote{ font-size:9pt; font-style:italic; color:var(--navy); line-height:1.3; padding-left:.14in; border-left:2px solid var(--gold-bright); align-self:center; min-width:0; }
+  .quote span{ display:block; font-style:normal; font-size:7pt; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-top:3px; }
 
   h2{ font-size:8pt; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:.06in; }
 
@@ -113,15 +115,14 @@
   .brand .wm small{ color:#fff; }
   .brand-seal img{ width:100%; height:100%; top:0; left:0; object-fit:contain; }
   .bar .issue{ font-family:"Jost",sans-serif; font-size:13pt; letter-spacing:.015em; }
-  .hero{ grid-template-columns:1.6in minmax(0,1fr) 1.6in; }
-  .hero::after{ content:""; }
+  .hero{ grid-template-columns:1.6in minmax(0,1fr) 2.3in; }
   .company-title{ text-align:center; min-width:0; }
   .anduril-wordmark{ width:100%; max-width:320px; height:auto; display:block; margin:0 auto; }
   @media print{
     .bar{ height:.62in; }
     .intro .intro-publisher{ color:var(--navy); }
     .content{ gap:.05in; padding-top:.08in; }
-    .hero{ grid-template-columns:1.15in minmax(0,1fr) 1.15in; padding-bottom:.06in; }
+    .hero{ grid-template-columns:1.15in minmax(0,1fr) 2.1in; padding-bottom:.06in; }
     .drop{ width:1.05in; height:1.1in; }
     .intro p{ font-size:9pt; line-height:1.35; }
     .foot{ flex-shrink:0; }
@@ -138,9 +139,11 @@
     .more ul{ padding-left:.1in; }
     .builds{ gap:.04in .1in; }
     .chip{ font-size:7pt; padding:2px 8px; }
-    .intro p{ font-size:8.7pt; line-height:1.32; margin-top:.06in; }
+    .intro p{ font-size:8.7pt; line-height:1.3; margin-top:.04in; }
     .stat .n{ font-size:17pt; }
-    .lattice{ padding:.07in .18in; } .lattice .d{ font-size:7.9pt; line-height:1.28; }
+    .quote{ font-size:8.2pt; line-height:1.25; padding-left:.12in; } .quote span{ font-size:6.4pt; margin-top:2px; }
+    .stats{ padding:.04in 0; }
+    .lattice{ padding:.05in .18in; } .lattice .d{ font-size:7.8pt; line-height:1.26; }
     .tl .x{ font-size:7.5pt; line-height:1.28; }
     .fine{ margin-top:.04in; }
     .foot{ padding:.15in .5in .14in; }
@@ -161,7 +164,7 @@
     .bar .date{ font-size:12px; }
     .content{ padding:20px 32px 24px; gap:18px; }
     .content>*{ flex-shrink:0; }
-    .hero{ grid-template-columns:170px minmax(0,1fr) 170px; gap:28px; padding-bottom:16px; }
+    .hero{ grid-template-columns:170px minmax(0,1fr) 310px; gap:28px; padding-bottom:16px; }
     .drop{ width:160px; height:175px; }
     .hero .issue{ font-size:23px; margin-bottom:9px; }
     .hero h1{ line-height:1; }
@@ -175,6 +178,7 @@
     .stat .n{ font-size:30px; }
     .stat .l{ font-size:11px; margin-top:4px; }
     .stat .s{ font-size:13px; margin-top:3px; }
+    .quote{ font-size:15px; line-height:1.4; padding-left:16px; } .quote span{ font-size:11px; margin-top:5px; }
     h2{ font-size:12px; margin-bottom:10px; }
     .mid{ grid-template-columns:minmax(0,.95fr) minmax(0,1.2fr); gap:26px; }
     .mid{ align-items:stretch; }
@@ -213,7 +217,7 @@
     .bar{ height:112px; grid-template-columns:1fr auto; gap:10px 20px; padding:16px 24px; }
     .bar .date{ grid-column:2; grid-row:1; }
     .bar .issue{ grid-column:1 / -1; grid-row:2; font-size:23px; }
-    .hero{ grid-template-columns:140px minmax(0,1fr) 140px; }
+    .hero{ grid-template-columns:140px minmax(0,1fr) 230px; }
     .drop{ width:130px; height:150px; }
     .content{ padding:18px 24px 24px; }
     .mid{ grid-template-columns:1fr; }
@@ -234,7 +238,7 @@
     .bar .issue{ font-size:19px; }
     .content{ padding:16px; gap:18px; }
     .hero{ grid-template-columns:100px minmax(0,1fr); gap:14px; }
-    .hero::after{ display:none; }
+    .quote{ grid-column:1/-1; font-size:14px; }
     .drop{ width:100px; height:120px; }
     .hero .issue{ font-size:14px; white-space:normal; margin-bottom:6px; }
     .hero .issue .mini-drop{ display:none; }
@@ -279,7 +283,7 @@
   <!-- Official mark source: https://images.squarespace-cdn.com/content/v1/58b86940579fb3c2d7279866/1586386049680-KV0NSGFO6VU8LBV2M0B9/Logo_color.png -->
   <div class="scroll"><!-- header + content scroll together on screen; footer stays pinned -->
   <div class="bar">
-    <div class="brand"><span class="brand-seal"><img src="assets/rainmaker_official_gold.svg?v=1791412364" alt="Rainmaker Securities logo"></span><div class="wm">RAINMAKER<small>SECURITIES</small></div></div>
+    <div class="brand"><span class="brand-seal"><img src="assets/rainmaker_official_gold.svg?v=1791412935" alt="Rainmaker Securities logo"></span><div class="wm">RAINMAKER<small>SECURITIES</small></div></div>
     <div class="issue"><span>Raindrop of the Month</span></div>
     <div class="date">October 2026</div>
   </div>
@@ -314,9 +318,10 @@
         </svg>
       </div>
       <div class="company-title">
-        <h1><img class="anduril-wordmark" src="assets/anduril_official_wordmark.svg?v=1791412364" alt="Anduril"></h1>
+        <h1><img class="anduril-wordmark" src="assets/anduril_official_wordmark.svg?v=1791412935" alt="Anduril"></h1>
         <div class="sub">Robotic Defense and AI Command Systems</div>
       </div>
+    <div class="quote">&ldquo;It&rsquo;s just really grown a lot faster than I anticipated. I thought we&rsquo;d be five, six years from now at this point.&rdquo;<span>Brian Schimpf, Anduril CEO, Sourcery podcast, December 2025</span></div>
     </div>
     <div class="intro">
         <p>Rainmaker Securities presents Anduril as the October 2026 Raindrop of the Month. Founded in 2017, Anduril has rapidly established itself at the forefront of modern homeland defense. Instead of sending thousands of foot soldiers into enemy territory, Anduril builds battle-ready machines and sensors designed to be controlled from overseas. From AI-piloted vehicles to state-of-the-art devices to Lattice (an AI command system coordinating and directing all the machines at once), Anduril has revolutionized the frontier of warfare! Just nine years in, they are one of the most requested names on our desk.</p>
@@ -342,13 +347,13 @@
     <div class="mid">
       <div class="left">
       <div class="photo">
-        <img class="on" src="assets/fury_amraam.jpg?v=1791412364" alt="YFQ-44A Fury firing an AIM-120">
-        <img src="assets/lattice_screen.jpg?v=1791412364" alt="Lattice command screen on a wall display">
-        <img src="assets/anvil_launch.jpg?v=1791412364" alt="Anvil interceptor launching" style="object-position:50% 40%">
-        <img src="assets/falcon9_transporter17.jpg?v=1791412364" alt="Falcon 9 launch carrying Anduril-26" style="object-position:50% 60%">
-        <img src="assets/ghostx_flight.jpg?v=1791412364" alt="Ghost-X drone in flight" style="object-position:60% 40%">
-        <img src="assets/sentry_b52.jpg?v=1791412364" alt="Sentry sensor head with a B-52 behind">
-        <img src="assets/dive_ld_crop.jpg?v=1791412364" alt="Dive-LD autonomous submarine" style="object-position:50% 100%">
+        <img class="on" src="assets/fury_amraam.jpg?v=1791412935" alt="YFQ-44A Fury firing an AIM-120">
+        <img src="assets/lattice_screen.jpg?v=1791412935" alt="Lattice command screen on a wall display">
+        <img src="assets/anvil_launch.jpg?v=1791412935" alt="Anvil interceptor launching" style="object-position:50% 40%">
+        <img src="assets/falcon9_transporter17.jpg?v=1791412935" alt="Falcon 9 launch carrying Anduril-26" style="object-position:50% 60%">
+        <img src="assets/ghostx_flight.jpg?v=1791412935" alt="Ghost-X drone in flight" style="object-position:60% 40%">
+        <img src="assets/sentry_b52.jpg?v=1791412935" alt="Sentry sensor head with a B-52 behind">
+        <img src="assets/dive_ld_crop.jpg?v=1791412935" alt="Dive-LD autonomous submarine" style="object-position:50% 100%">
         <div class="nav prev" onclick="slide(-1)">&#8249;</div>
         <div class="nav next" onclick="slide(1)">&#8250;</div>
         <div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
