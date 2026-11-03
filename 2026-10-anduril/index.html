@@ -36,6 +36,19 @@
   .scroll{ display:contents; }
   .content{ padding:.16in .5in .12in; flex:1; display:flex; flex-direction:column; gap:.12in; }
 
+  /* top row: market sentiment (left) + company introduction (right) */
+  .top{ flex-shrink:0; display:grid; grid-template-columns:1.15fr 1fr; gap:.3in; align-items:start; padding:.12in .5in .11in; border-bottom:1px solid #b7cbdc; }
+  .note{ min-width:0; }
+  .note p{ font-size:8.3pt; line-height:1.38; color:var(--ink-2); }
+  .note p+p{ margin-top:.05in; }
+  .note p b{ color:var(--navy-deep); font-weight:600; }
+  .top .intro{ min-width:0; }
+  .top .intro p{ margin-top:0; }
+
+  .top p{ text-wrap:pretty; font-kerning:normal; }
+  .top .intro{ border-left:1px solid #cbd8e5; padding-left:.22in; }
+  .hero .chips{ grid-column:1 / -1; justify-content:center; margin-top:0; gap:5px; }
+
   /* hero */
   .hero{ display:grid; grid-template-columns:1.6in 1fr; gap:.25in; align-items:center; padding-bottom:.1in; border-bottom:1px solid #b7cbdc; }
   .drop{ width:1.6in; height:1.7in; }
@@ -120,17 +133,23 @@
   .anduril-wordmark{ width:100%; max-width:320px; height:auto; display:block; margin:0 auto; }
   @media print{
     .bar{ height:.62in; }
+    .top{ padding:.1in .5in; gap:.22in; grid-template-columns:1.15fr 1fr; }
+    .top .note p,.top .intro p{ font-size:8pt; line-height:1.36; }
+    .note p+p{ margin-top:.04in; }
+    .top .intro p{ margin-top:0; }
     .intro .intro-publisher{ color:var(--navy); }
     .content{ gap:.05in; padding-top:.08in; }
-    .hero{ grid-template-columns:1.15in minmax(0,1fr) 2.1in; padding-bottom:.06in; }
+    .hero{ grid-template-columns:1.15in minmax(0,1fr) 2.1in; gap:.07in .22in; padding-bottom:.08in; }
+    .hero .chips{ flex-wrap:nowrap; gap:4px; }
+    .hero .chip{ font-size:6.5pt; letter-spacing:.035em; padding:2px 7px; white-space:nowrap; }
     .drop{ width:1.05in; height:1.1in; }
     .intro p{ font-size:9pt; line-height:1.35; }
     .foot{ flex-shrink:0; }
     /* Let real overflow spill to a second page so render.sh's one-page check catches it,
        instead of the page box silently clipping the footer. */
     .page{ overflow:visible; height:auto; min-height:11in; }
-    .mid{ align-items:start; grid-template-columns:2.75in 1fr; gap:.15in; }
-    .photo{ height:2.05in; box-shadow:none; }
+    .mid{ align-items:start; grid-template-columns:2.4in 1fr; gap:.15in; }
+    .photo{ height:1.55in; box-shadow:none; }
     .item .t{ font-size:9pt; }
     .item ul{ margin-top:1px; padding-left:.1in; }
     .item li{ font-size:7pt; line-height:1.22; margin-top:0; }
@@ -146,7 +165,7 @@
     .lattice{ padding:.05in .18in; } .lattice .d{ font-size:7.8pt; line-height:1.26; }
     .tl .x{ font-size:7.5pt; line-height:1.28; }
     .fine{ margin-top:.04in; }
-    .foot{ padding:.15in .5in .14in; }
+    .foot{ padding:.15in .5in .14in; } .foot .say{ max-width:5.6in; }
   }
   /* Readable screen edition: the trade bar stays pinned; the header scrolls away with the content. */
   @media screen{
@@ -162,9 +181,16 @@
     .brand .wm small{ font-size:10px; margin-top:5px; letter-spacing:.3em; }
     .bar .issue{ font-size:25px; letter-spacing:.01em; }
     .bar .date{ font-size:12px; }
+    .top{ padding:26px 32px; gap:28px; }
+    .top .intro{ padding-left:28px; }
+    .top .note p,.top .intro p{ font-size:15px; line-height:1.6; letter-spacing:.005em; }
+    .note p{ font-size:15px; line-height:1.5; }
+    .note p+p{ margin-top:10px; }
+    .top .intro p{ margin-top:0; }
     .content{ padding:20px 32px 24px; gap:18px; }
     .content>*{ flex-shrink:0; }
-    .hero{ grid-template-columns:170px minmax(0,1fr) 310px; gap:28px; padding-bottom:16px; }
+    .hero{ grid-template-columns:170px minmax(0,1fr) 310px; gap:14px 28px; padding-bottom:18px; }
+    .hero .chips{ gap:7px; }
     .drop{ width:160px; height:175px; }
     .hero .issue{ font-size:23px; margin-bottom:9px; }
     .hero h1{ line-height:1; }
@@ -219,6 +245,8 @@
     .bar .issue{ grid-column:1 / -1; grid-row:2; font-size:23px; }
     .hero{ grid-template-columns:140px minmax(0,1fr) 230px; }
     .drop{ width:130px; height:150px; }
+    .top{ grid-template-columns:1fr; gap:18px; padding:20px 24px 18px; }
+    .top .intro{ border-left:0; border-top:1px solid #cbd8e5; padding:18px 0 0; }
     .content{ padding:18px 24px 24px; }
     .mid{ grid-template-columns:1fr; }
     .photo{ aspect-ratio:16/7; min-height:220px; }
@@ -236,6 +264,8 @@
     .brand .wm small{ font-size:8px; }
     .bar .date{ font-size:10px; letter-spacing:.08em; }
     .bar .issue{ font-size:19px; }
+    .top{ padding:16px; }
+    .note p{ font-size:14.5px; }
     .content{ padding:16px; gap:18px; }
     .hero{ grid-template-columns:100px minmax(0,1fr); gap:14px; }
     .quote{ grid-column:1/-1; font-size:14px; }
@@ -283,15 +313,27 @@
   <!-- Official mark source: https://images.squarespace-cdn.com/content/v1/58b86940579fb3c2d7279866/1586386049680-KV0NSGFO6VU8LBV2M0B9/Logo_color.png -->
   <div class="scroll"><!-- header + content scroll together on screen; footer stays pinned -->
   <div class="bar">
-    <div class="brand"><span class="brand-seal"><img src="assets/rainmaker_official_gold.svg?v=1791498037" alt="Rainmaker Securities logo"></span><div class="wm">RAINMAKER<small>SECURITIES</small></div></div>
+    <div class="brand"><span class="brand-seal"><img src="assets/rainmaker_official_gold.svg?v=1793740217" alt="Rainmaker Securities logo"></span><div class="wm">RAINMAKER<small>SECURITIES</small></div></div>
     <div class="issue"><span>Raindrop of the Month</span></div>
     <div class="date">October 2026</div>
+  </div>
+
+  <!-- ===== 1b. TOP ROW: market sentiment (left) + company introduction (right) ===== -->
+  <div class="top">
+    <div class="note" aria-label="Market sentiment">
+      <p>The private market has split in two. At the top, Anthropic&rsquo;s employees passed on selling at the $350B tender price in April, and within weeks, secondary desks were pricing the company above $1 trillion. The IPO filing is now in, and price talk is above $1.5T. OpenAI&rsquo;s $7B August tender cleared at $852B, flat to its last round, and Anthropic now trades above OpenAI on the secondary market. Databricks is changing hands at or above its $190B round while its IPO slips to 2027.</p>
+      <p>Below those names, the picture is different. Third-quarter volume on Rainmaker was up 57% from the second quarter, but roughly 84% of trades cleared below the company&rsquo;s last primary valuation. There is plenty of liquidity, but most of it is going to a short list of companies, and sellers elsewhere are accepting discounts to get trades done. With the IPO window only partly open, secondaries have become the main route to liquidity, and buyers are choosing carefully.</p>
+    </div>
+    <div class="intro">
+      <p>Rainmaker Securities presents Anduril as the October 2026 Raindrop of the Month. Founded in 2017, Anduril has rapidly established itself at the forefront of modern homeland defense. Instead of sending thousands of foot soldiers into enemy territory, Anduril builds battle-ready machines and sensors designed to be controlled from overseas. From AI-piloted vehicles and state-of-the-art devices to Lattice (an AI command system coordinating and directing all the machines at once), Anduril has revolutionized the frontier of warfare. Just nine years in, they are one of the most requested names on our desk.</p>
+
+  </div>
   </div>
 
   <main class="content" tabindex="0" aria-label="Anduril company profile">
 
     <!-- Official Anduril wordmark: https://www.anduril.com/assets/images/icons/anduril-logo.xxbmzmKB-d.svg -->
-    <!-- ===== 2. HERO: raindrop + company name, subtitle, intro, chips ===== -->
+    <!-- ===== 2. HERO: raindrop + company name, subtitle, quote, company tags ===== -->
     <div class="hero">
       <div class="drop">
         <svg viewBox="0 0 140 160" role="img" aria-label="Glass-blue raindrop with the Anduril logo, October 2026">
@@ -318,20 +360,17 @@
         </svg>
       </div>
       <div class="company-title">
-        <h1><img class="anduril-wordmark" src="assets/anduril_official_wordmark.svg?v=1791498037" alt="Anduril"></h1>
+        <h1><img class="anduril-wordmark" src="assets/anduril_official_wordmark.svg?v=1793740217" alt="Anduril"></h1>
         <div class="sub">Robotic Defense and AI Command Systems</div>
       </div>
     <div class="quote">&ldquo;We have consistently doubled revenue every year. So even over a billion dollars, we&rsquo;re still doubling revenue.&rdquo;<span>Brian Schimpf, Anduril CEO, Sourcery podcast, December 2025</span></div>
-    </div>
-    <div class="intro">
-        <p>Rainmaker Securities presents Anduril as the October 2026 Raindrop of the Month. Founded in 2017, Anduril has rapidly established itself at the forefront of modern homeland defense. Instead of sending thousands of foot soldiers into enemy territory, Anduril builds battle-ready machines and sensors designed to be controlled from overseas. From AI-piloted vehicles to state-of-the-art devices to Lattice (an AI command system coordinating and directing all the machines at once), Anduril has revolutionized the frontier of warfare! Just nine years in, they are one of the most requested names on our desk.</p>
-        <div class="chips">
-          <span class="chip"><b>Sector</b> &nbsp;Defense technology · AI</span>
-          <span class="chip"><b>Stage</b> &nbsp;Series H · $61B</span>
-          <span class="chip"><b>HQ</b> &nbsp;Costa Mesa, CA</span>
-          <span class="chip"><b>Founded</b> &nbsp;2017</span>
-          <span class="chip"><b>CEO</b> &nbsp;Brian Schimpf</span>
-        </div>
+      <div class="chips">
+        <span class="chip"><b>Sector</b> &nbsp;Defense technology · AI</span>
+        <span class="chip"><b>Stage</b> &nbsp;Series H · $61B</span>
+        <span class="chip"><b>HQ</b> &nbsp;Costa Mesa, CA</span>
+        <span class="chip"><b>Founded</b> &nbsp;2017</span>
+        <span class="chip"><b>CEO</b> &nbsp;Brian Schimpf</span>
+      </div>
     </div>
 
     <!-- ===== 3. KEY NUMBERS (four stats) ===== -->
@@ -347,49 +386,47 @@
     <div class="mid">
       <div class="left">
       <div class="photo">
-        <img class="on" src="assets/fury_amraam.jpg?v=1791498037" alt="YFQ-44A Fury firing an AIM-120">
-        <img src="assets/lattice_screen.jpg?v=1791498037" alt="Lattice command screen on a wall display">
-        <img src="assets/anvil_launch.jpg?v=1791498037" alt="Anvil interceptor launching" style="object-position:50% 40%">
-        <img src="assets/falcon9_transporter17.jpg?v=1791498037" alt="Falcon 9 launch carrying Anduril-26" style="object-position:50% 60%">
-        <img src="assets/ghostx_flight.jpg?v=1791498037" alt="Ghost-X drone in flight" style="object-position:60% 40%">
-        <img src="assets/sentry_b52.jpg?v=1791498037" alt="Sentry sensor head with a B-52 behind">
-        <img src="assets/dive_ld_crop.jpg?v=1791498037" alt="Dive-LD autonomous submarine" style="object-position:50% 100%">
+        <img class="on" src="assets/fury_amraam.jpg?v=1793740217" alt="YFQ-44A Fury firing an AIM-120">
+        <img src="assets/lattice_screen.jpg?v=1793740217" alt="Lattice command screen on a wall display">
+        <img src="assets/anvil_launch.jpg?v=1793740217" alt="Anvil interceptor launching" style="object-position:50% 40%">
+        <img src="assets/falcon9_transporter17.jpg?v=1793740217" alt="Falcon 9 launch carrying Anduril-26" style="object-position:50% 60%">
+        <img src="assets/ghostx_flight.jpg?v=1793740217" alt="Ghost-X drone in flight" style="object-position:60% 40%">
+        <img src="assets/sentry_b52.jpg?v=1793740217" alt="Sentry sensor head with a B-52 behind">
+        <img src="assets/dive_ld_crop.jpg?v=1793740217" alt="Dive-LD autonomous submarine" style="object-position:50% 100%">
         <div class="nav prev" onclick="slide(-1)">&#8249;</div>
         <div class="nav next" onclick="slide(1)">&#8250;</div>
         <div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
         <div class="cap">
           <span class="on"><b>Live fire.</b> A YFQ-44A Fury fires an AIM-120 AMRAAM over the Mojave Desert, July 2026. The first missile shot by any U.S. drone of its class. U.S. Air Force photo.</span>
           <span><b>Lattice.</b> The command screen on the wall during an Air Force Advanced Battle Management System demo, tracking Anduril sentry towers across White Sands, September 2020. U.S. Air Force photo.</span>
-          <span><b>Anvil.</b> Anduril's interceptor drone leaving its launch box to run down a hostile drone at Minot AFB, October 2025. DoD photo.</span>
-          <span><b>Anduril-26.</b> The company's first satellite rode this Falcon 9 out of Vandenberg on July 7, 2026. It is now tasked from orbit through Lattice. U.S. Space Force photo.</span>
-          <span><b>Ghost-X.</b> Anduril's autonomous reconnaissance drone on its first National Guard flights, New Jersey, September 2026. U.S. Army photo.</span>
-          <span><b>Sentry.</b> The sensor head of Anduril's counter-drone sentry scanning the Minot flightline as a B-52 climbs out, October 2025. DoD photo.</span>
-          <span><b>Dive-LD.</b> Anduril's autonomous submarine going into the water at the Navy's Keyport, Washington range. U.S. Navy photo.</span>
+          <span><b>Anvil.</b> Anduril&rsquo;s interceptor drone leaving its launch box to run down a hostile drone at Minot AFB, October 2025. DoD photo.</span>
+          <span><b>Anduril-26.</b> The company&rsquo;s first satellite rode this Falcon 9 out of Vandenberg on July 7, 2026. It is now tasked from orbit through Lattice. U.S. Space Force photo.</span>
+          <span><b>Ghost-X.</b> Anduril&rsquo;s autonomous reconnaissance drone on its first National Guard flights, New Jersey, September 2026. U.S. Army photo.</span>
+          <span><b>Sentry.</b> The sensor head of Anduril&rsquo;s counter-drone sentry scanning the Minot flightline as a B-52 climbs out, October 2025. DoD photo.</span>
+          <span><b>Dive-LD.</b> Anduril&rsquo;s autonomous submarine going into the water at the Navy&rsquo;s Keyport, Washington, range. U.S. Navy photo.</span>
         </div>
       </div>
       <div class="more">
         <h2>Customers</h2>
         <ul>
           <li><b>U.S. Army:</b> 10-year Lattice contract, $20B ceiling.</li>
-          <li><b>U.S. Air Force:</b> Fury production for the CCA fleet.</li>
-          <li><b>U.S. Navy:</b> Virginia-class sub parts, Dive-LD, Roadrunner.</li>
+          <li><b>U.S. Air Force:</b> Fury for the CCA fleet.</li>
+          <li><b>U.S. Navy:</b> sub components, Dive-LD, and Roadrunner.</li>
           <li><b>U.S. Marines:</b> 600+ Bolt-M strike drones.</li>
-          <li><b>Border Protection:</b> 300+ sentry towers, 200 more ordered.</li>
-          <li><b>Australia:</b> Ghost Shark subs, A$1.7B program.</li>
-          <li><b>Taiwan:</b> 2,000+ Altius drones, deliveries from Q4 2026.</li>
-          <li><b>UAE, Poland, Kuwait:</b> Omen, Barracuda, counter-drone kits.</li>
+          <li><b>Border Protection:</b> 500+ sentry towers ordered.</li>
+          <li><b>Allies:</b> Australia, Taiwan, UAE, Poland, and Kuwait.</li>
         </ul>
       </div>
       </div>
       <div>
         <h2>What they build</h2>
         <div class="builds">
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 14-9-3-9 3z"/><path d="M12 14v6"/></svg></div><div><div class="t">Autonomous aircraft</div><ul><li><b>Fury:</b> AI-piloted wingman jet for F-35s.</li><li><b>Ghost:</b> reconnaissance drone used by the U.S. Army.</li><li><b>Altius:</b> tube-launched strike drone.</li><li><b>Bolt-M:</b> backpack strike drone for the Marines.</li><li><b>Omen:</b> long-range VTOL drone unveiled in 2026.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c3 3 4 8 4 12l-4 4-4-4c0-4 1-9 4-12z"/><path d="M8 14l-3 2 2 3M16 14l3 2-2 3"/></svg></div><div><div class="t">Missiles &amp; interceptors</div><ul><li><b>Barracuda:</b> cruise missile built for mass production.</li><li><b>Roadrunner:</b> reusable jet-powered interceptor.</li><li><b>Rocket motors:</b> 6,000 a year from its Mississippi plant.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21V9"/><path d="M8 21h8"/><path d="M7 7a7 7 0 0 1 10 0"/><path d="M4 4a11 11 0 0 1 16 0"/><circle cx="12" cy="9" r="1.5"/></svg></div><div><div class="t">Sensors &amp; scanners</div><ul><li><b>Sentry towers:</b> autonomous border and base towers.</li><li><b>Wisp:</b> infrared camera that spots threats on its own.</li><li><b>Seabed Sentry:</b> sensor nodes on the ocean floor.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 8v5M9.5 11.5L12 13l2.5-1.5"/></svg></div><div><div class="t">Air &amp; space defense</div><ul><li><b>Anvil:</b> drone that rams hostile drones out of the sky.</li><li><b>Pulsar:</b> jammer, in service with U.S. forces.</li><li><b>Golden Dome:</b> space-based interceptor prototypes.</li><li><b>Anduril-26:</b> first satellite, launched July 2026.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 13c3-5 7-5 9 0s6 5 9 0"/><path d="M6 8l5 2 6-2-2 4"/><path d="M10 5v3"/></svg></div><div><div class="t">Underwater vehicles</div><ul><li><b>Ghost Shark:</b> extra-large sub for the U.S. and Australia.</li><li><b>Dive-LD:</b> long-range sub in U.S. Navy service.</li><li><b>Copperhead:</b> torpedo drone fired from autonomous subs.</li><li><b>Surface vessels:</b> unmanned ships built with HD Hyundai.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 16 0v3H4z"/><path d="M4 15h16M9 15v3h6v-3"/><path d="M14 10h3"/></svg></div><div><div class="t">Soldier &amp; command systems</div><ul><li><b>EagleEye:</b> mixed-reality helmet, taken over from Microsoft.</li><li><b>Menace:</b> command center that ships in a container.</li></ul></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 14-9-3-9 3z"/><path d="M12 14v6"/></svg></div><div><div class="t">Autonomous aircraft</div><ul><li><b>Fury:</b> AI wingman jet for F-35s.</li><li><b>Ghost:</b> Army reconnaissance drone.</li><li><b>Altius, Bolt-M:</b> tube and backpack strike drones.</li><li><b>Omen:</b> long-range VTOL drone, new in 2026.</li></ul></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c3 3 4 8 4 12l-4 4-4-4c0-4 1-9 4-12z"/><path d="M8 14l-3 2 2 3M16 14l3 2-2 3"/></svg></div><div><div class="t">Missiles &amp; interceptors</div><ul><li><b>Barracuda:</b> mass-produced cruise missile.</li><li><b>Roadrunner:</b> reusable jet interceptor.</li><li><b>Rocket motors:</b> 6,000 a year in Mississippi.</li></ul></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21V9"/><path d="M8 21h8"/><path d="M7 7a7 7 0 0 1 10 0"/><path d="M4 4a11 11 0 0 1 16 0"/><circle cx="12" cy="9" r="1.5"/></svg></div><div><div class="t">Sensors &amp; scanners</div><ul><li><b>Sentry towers:</b> border and base security.</li><li><b>Wisp:</b> infrared camera that spots threats itself.</li><li><b>Seabed Sentry:</b> ocean-floor sensor nodes.</li></ul></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 8v5M9.5 11.5L12 13l2.5-1.5"/></svg></div><div><div class="t">Air &amp; space defense</div><ul><li><b>Anvil:</b> rams hostile drones out of the sky.</li><li><b>Pulsar:</b> jammer in U.S. service.</li><li><b>Golden Dome:</b> space interceptor prototypes.</li><li><b>Anduril-26:</b> first satellite, launched July 2026.</li></ul></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 13c3-5 7-5 9 0s6 5 9 0"/><path d="M6 8l5 2 6-2-2 4"/><path d="M10 5v3"/></svg></div><div><div class="t">Underwater vehicles</div><ul><li><b>Ghost Shark:</b> extra-large sub, U.S. and Australia.</li><li><b>Dive-LD:</b> long-range sub in Navy service.</li><li><b>Copperhead:</b> torpedo drone fired from subs.</li><li><b>Surface vessels:</b> unmanned ships with HD Hyundai.</li></ul></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 16 0v3H4z"/><path d="M4 15h16M9 15v3h6v-3"/><path d="M14 10h3"/></svg></div><div><div class="t">Soldier &amp; command systems</div><ul><li><b>EagleEye:</b> mixed-reality helmet from Microsoft.</li><li><b>Menace:</b> command center in a container.</li></ul></div></div>
         </div>
       </div>
     </div>
@@ -426,7 +463,7 @@
   </div><!-- /scroll -->
   <div class="foot">
     <div class="row">
-      <div class="say"><b>Holding Anduril or wanting to buy?</b> Rainmaker Securities brokers private shares in Anduril and other late-stage companies. Reach out to your representative, or place an order on our exchange.</div>
+      <div class="say"><b>Holding Anduril or wanting to buy?</b> Rainmaker Securities brokers private shares in Anduril and other late-stage companies. Reach out to your representative or place an order on our exchange.</div>
       <div class="pill"><svg><use href="#rmark"/></svg><span>Trade on <b>Rainmaker-X</b></span></div>
     </div>
 
