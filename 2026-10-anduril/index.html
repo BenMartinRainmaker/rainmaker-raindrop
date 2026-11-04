@@ -264,7 +264,7 @@
     .brand .wm small{ font-size:8px; }
     .bar .date{ font-size:10px; letter-spacing:.08em; }
     .bar .issue{ font-size:19px; }
-    .top{ padding:16px; }
+    .top{ padding:16px 24px; }
     .note p{ font-size:14.5px; }
     .content{ padding:16px; gap:18px; }
     .hero{ grid-template-columns:100px minmax(0,1fr); gap:14px; }
@@ -293,6 +293,82 @@
     .bar{ height:72px; }
     .foot{ padding-block:22px; }
   }
+
+  /* Unified introduction and compact company overview. */
+  .top{ display:block; }
+  .top .note p{ text-wrap:pretty; text-indent:1.6em; text-align:justify; text-align-last:left; hyphens:auto; }
+  .mid{ grid-template-columns:2.65in minmax(0,1fr); align-items:stretch; }
+  .left{ gap:.1in; }
+  .products{ min-width:0; }
+  .products .more{ margin-top:.12in; padding-top:.1in; border-top:1px solid #cbd8e5; }
+  .products .more ul{ display:grid; grid-template-columns:1fr 1fr; gap:3px 14px; }
+  .valuation{ background:#fff; border:1px solid #d3dfeb; border-radius:8px; padding:.1in .12in .08in; margin:0; }
+  .chart-heading h2{ margin-bottom:2px; }
+  .chart-heading>span{ display:block; color:var(--muted); font-size:7pt; }
+  .valuation svg{ width:100%; height:auto; display:block; overflow:visible; }
+  .chart-axis{ font:11px "Jost",sans-serif; fill:#6b7480; }
+  .chart-round{ font:10px "Jost",sans-serif; fill:#6b7480; }
+  .chart-value{ font:600 12px "Jost",sans-serif; fill:#061530; }
+  .valuation figcaption{ font-size:6pt; line-height:1.35; color:var(--muted); }
+  .valuation a{ color:var(--navy); text-decoration-color:#b7cbdc; text-underline-offset:2px; }
+  @media screen{
+    .top{ padding:22px 64px; }
+    .mid{ grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr); gap:24px; }
+    .left{ gap:16px; }
+    .left .photo{ min-height:210px; flex:1 1 210px; }
+    .builds{ gap:13px 16px; }
+    .item{ gap:8px; }
+    .item .ic{ width:26px; height:26px; flex-basis:26px; }
+    .item .ic svg{ width:18px; height:18px; }
+    .item .t{ font-size:14px; line-height:1.25; }
+    .item li{ font-size:13px; line-height:1.35; margin-top:2px; }
+    .products .more{ margin-top:16px; padding-top:12px; }
+    .products .more h2{ margin-bottom:7px; }
+    .products .more li{ font-size:13px; line-height:1.35; margin-top:0; }
+    .valuation{ padding:14px 16px 12px; }
+    .chart-heading>span{ font-size:11px; }
+    .valuation figcaption{ font-size:10px; line-height:1.4; }
+  }
+  @media screen and (max-width:900px){
+    .top{ padding:20px 40px; }
+    .mid{ grid-template-columns:1fr; gap:22px; }
+    .left{ display:grid; grid-template-columns:1fr 1fr; align-items:stretch; gap:16px; }
+    .left .photo{ aspect-ratio:auto; min-height:230px; height:100%; }
+    .valuation{ align-content:center; }
+  }
+  @media screen and (max-width:600px){
+    .top{ padding:16px; }
+    .left{ display:flex; flex-direction:column; }
+    .left .photo{ flex:none; width:100%; aspect-ratio:4/3; min-height:0; height:auto; }
+    .builds{ grid-template-columns:1fr; gap:14px; }
+    .item .t{ font-size:15px; }
+    .item li,.products .more li{ font-size:14px; line-height:1.4; }
+    .products .more ul{ grid-template-columns:1fr; gap:5px; }
+  }
+  @media print{
+    .content{ gap:.035in; }
+    .bar{ height:.55in; }
+    .hero{ padding-bottom:.05in; }
+    .drop{ height:1in; }
+    .lattice svg{ width:.45in; height:.45in; }
+    .builds{ row-gap:.05in; }
+    .top{ display:block; padding:.06in .7in; }
+    .top .note p{ line-height:1.3; }
+    .foot{ padding:.1in .5in; }
+    .mid{ grid-template-columns:2.65in minmax(0,1fr); gap:.16in; align-items:stretch; }
+    .left .photo{ flex:1; min-height:1.3in; height:auto; }
+    .photo .cap{ font-size:7pt; line-height:1.25; padding:.2in .1in .08in; }
+    .item{ gap:5px; }
+    .item .ic{ width:.22in; height:.22in; flex-basis:.22in; }
+    .item .ic svg{ width:.16in; height:.16in; }
+    .item .t{ font-size:8.2pt; }
+    .builds{ gap:.07in .12in; }
+    .products .more{ margin-top:.09in; padding-top:.07in; }
+    .products .more li{ white-space:normal; font-size:7pt; line-height:1.25; }
+    .products .more ul{ gap:2px 10px; }
+    .valuation{ break-inside:avoid; padding:.08in .1in; }
+    .valuation figcaption{ font-size:6pt; }
+  }
 </style>
 </head>
 <body>
@@ -313,22 +389,14 @@
   <!-- Official mark source: https://images.squarespace-cdn.com/content/v1/58b86940579fb3c2d7279866/1586386049680-KV0NSGFO6VU8LBV2M0B9/Logo_color.png -->
   <div class="scroll"><!-- header + content scroll together on screen; footer stays pinned -->
   <div class="bar">
-    <div class="brand"><span class="brand-seal"><img src="assets/rainmaker_official_gold.svg?v=1793741323" alt="Rainmaker Securities logo"></span><div class="wm">RAINMAKER<small>SECURITIES</small></div></div>
+    <div class="brand"><span class="brand-seal"><img src="assets/rainmaker_official_gold.svg?v=1793825979" alt="Rainmaker Securities logo"></span><div class="wm">RAINMAKER<small>SECURITIES</small></div></div>
     <div class="issue"><span>Raindrop of the Month</span></div>
     <div class="date">November 2026</div>
   </div>
 
-  <!-- ===== 1b. TOP ROW: market sentiment (left) + company introduction (right) ===== -->
-  <div class="top">
-    <div class="note" aria-label="Market sentiment">
-      <p>The private market has split in two. At the top, Anthropic&rsquo;s employees passed on selling at the $350B tender price in April, and within weeks, secondary desks were pricing the company above $1 trillion. The IPO filing is now in, and price talk is above $1.5T. OpenAI&rsquo;s $7B August tender cleared at $852B, flat to its last round, and Anthropic now trades above OpenAI on the secondary market. Databricks is changing hands at or above its $190B round while its IPO slips to 2027.</p>
-      <p>Below those names, the picture is different. Third-quarter volume on Rainmaker was up 57% from the second quarter, but roughly 84% of trades cleared below the company&rsquo;s last primary valuation. There is plenty of liquidity, but most of it is going to a short list of companies, and sellers elsewhere are accepting discounts to get trades done. With the IPO window only partly open, secondaries have become the main route to liquidity, and buyers are choosing carefully.</p>
-    </div>
-    <div class="intro">
-      <p>Rainmaker Securities presents Anduril as the November 2026 Raindrop of the Month. Founded in 2017, Anduril has rapidly established itself at the forefront of modern homeland defense. Instead of sending thousands of foot soldiers into enemy territory, Anduril builds battle-ready machines and sensors designed to be controlled from overseas. From AI-piloted vehicles and state-of-the-art devices to Lattice (an AI command system coordinating and directing all the machines at once), Anduril has revolutionized the frontier of warfare. Just nine years in, they are one of the most requested names on our desk.</p>
-
-  </div>
-  </div>
+  <!-- ===== 1b. MARKET CONTEXT + COMPANY INTRODUCTION ===== -->
+  <div class="top"><div class="note"><p>The private market has split into two! At the top, Anthropic's employees passed on selling at the $350B tender price in April, and within weeks, secondary desks were pricing the company above $1 trillion. The IPO filing is now in, and price talk is above $1.5T. OpenAI's $7B August tender cleared at $852B, flat to its last round, and Anthropic now trades above OpenAI on the secondary market. Databricks is changing hands at or above its $190B round while its IPO slips to 2027. Below those names, the picture is different. Third-quarter volume on Rainmaker was up 57% from the second quarter, but roughly 84% of trades cleared below the company's last primary valuation. There is plenty of liquidity, but most of it is going to a short list of companies, and sellers elsewhere are accepting discounts to get trades done. With the IPO window only partly open, secondaries have become the main route to liquidity, and buyers are choosing carefully.</p>
+      <p>Amongst all the mayhem, Rainmaker Securities presents Anduril as the November 2026 Raindrop of the Month! Founded in 2017, Anduril has rapidly established itself at the forefront of modern homeland defense. Instead of sending thousands of foot soldiers into enemy territory, Anduril builds battle-ready machines and sensors designed to be controlled from overseas. From AI-piloted vehicles and state-of-the-art devices to Lattice (an AI command system coordinating and directing all the machines at once), Anduril has revolutionized the frontier of warfare. Just nine years in, they are one of the most requested names on our desk.</p></div></div>
 
   <main class="content" tabindex="0" aria-label="Anduril company profile">
 
@@ -360,7 +428,7 @@
         </svg>
       </div>
       <div class="company-title">
-        <h1><img class="anduril-wordmark" src="assets/anduril_official_wordmark.svg?v=1793741323" alt="Anduril"></h1>
+        <h1><img class="anduril-wordmark" src="assets/anduril_official_wordmark.svg?v=1793825979" alt="Anduril"></h1>
         <div class="sub">Robotic Defense and AI Command Systems</div>
       </div>
     <div class="quote">&ldquo;We have consistently doubled revenue every year. So even over a billion dollars, we&rsquo;re still doubling revenue.&rdquo;<span>Brian Schimpf, Anduril CEO, Sourcery podcast, December 2025</span></div>
@@ -381,18 +449,18 @@
       <div class="stat"><div class="n">$20B</div><div class="l">Army contract</div><div class="s">10-year ceiling, March 2026</div></div>
     </div>
 
-    <!-- ===== 4. PHOTO CAROUSEL (left) + WHAT IT BUILDS (right) =====
+    <!-- ===== 4. PHOTO CAROUSEL + VALUATION (left), PRODUCTS + CUSTOMERS (right) =====
          To add a photo: add an <img>, a <span> caption in the same position, and an <i></i> dot. -->
     <div class="mid">
       <div class="left">
       <div class="photo">
-        <img class="on" src="assets/fury_amraam.jpg?v=1793741323" alt="YFQ-44A Fury firing an AIM-120">
-        <img src="assets/lattice_screen.jpg?v=1793741323" alt="Lattice command screen on a wall display">
-        <img src="assets/anvil_launch.jpg?v=1793741323" alt="Anvil interceptor launching" style="object-position:50% 40%">
-        <img src="assets/falcon9_transporter17.jpg?v=1793741323" alt="Falcon 9 launch carrying Anduril-26" style="object-position:50% 60%">
-        <img src="assets/ghostx_flight.jpg?v=1793741323" alt="Ghost-X drone in flight" style="object-position:60% 40%">
-        <img src="assets/sentry_b52.jpg?v=1793741323" alt="Sentry sensor head with a B-52 behind">
-        <img src="assets/dive_ld_crop.jpg?v=1793741323" alt="Dive-LD autonomous submarine" style="object-position:50% 100%">
+        <img class="on" src="assets/fury_amraam.jpg?v=1793825979" alt="YFQ-44A Fury firing an AIM-120">
+        <img src="assets/lattice_screen.jpg?v=1793825979" alt="Lattice command screen on a wall display">
+        <img src="assets/anvil_launch.jpg?v=1793825979" alt="Anvil interceptor launching" style="object-position:50% 40%">
+        <img src="assets/falcon9_transporter17.jpg?v=1793825979" alt="Falcon 9 launch carrying Anduril-26" style="object-position:50% 60%">
+        <img src="assets/ghostx_flight.jpg?v=1793825979" alt="Ghost-X drone in flight" style="object-position:60% 40%">
+        <img src="assets/sentry_b52.jpg?v=1793825979" alt="Sentry sensor head with a B-52 behind">
+        <img src="assets/dive_ld_crop.jpg?v=1793825979" alt="Dive-LD autonomous submarine" style="object-position:50% 100%">
         <div class="nav prev" onclick="slide(-1)">&#8249;</div>
         <div class="nav next" onclick="slide(1)">&#8250;</div>
         <div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
@@ -406,6 +474,39 @@
           <span><b>Dive-LD.</b> Anduril&rsquo;s autonomous submarine going into the water at the Navy&rsquo;s Keyport, Washington, range. U.S. Navy photo.</span>
         </div>
       </div>
+      <figure class="valuation" aria-labelledby="valuation-title">
+        <div class="chart-heading"><h2 id="valuation-title">Valuation history</h2><span>Funding milestones · USD billions</span></div>
+        <svg viewBox="0 0 400 205" role="img" aria-labelledby="valuation-svg-title valuation-svg-desc">
+          <title id="valuation-svg-title">Anduril valuation milestones, ending at a reported $110 billion target</title>
+          <desc id="valuation-svg-desc">Completed rounds: 2021 Series D, $4.6 billion; 2022 Series E, $8.48 billion; 2024 Series F, $14 billion; 2025 Series G, $30.5 billion; May 2026 Series H, $61 billion. The dashed gold extension ends at $110 billion, a possible second-stage financing target reported by Reuters on July 24, 2026, not a completed round. Milestones are equally spaced; the vertical axis is linear in USD billions.</desc>
+          <defs><linearGradient id="valuation-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#2f7fc0" stop-opacity=".24"/><stop offset="1" stop-color="#2f7fc0" stop-opacity=".02"/></linearGradient></defs>
+          <line x1="36" y1="154" x2="370" y2="154" stroke="#dde5ee"/><text x="27" y="158" text-anchor="end" class="chart-axis">0</text>
+<line x1="36" y1="112.33333333333334" x2="370" y2="112.33333333333334" stroke="#dde5ee"/><text x="27" y="116.33333333333334" text-anchor="end" class="chart-axis">40</text>
+<line x1="36" y1="70.66666666666667" x2="370" y2="70.66666666666667" stroke="#dde5ee"/><text x="27" y="74.66666666666667" text-anchor="end" class="chart-axis">80</text>
+<line x1="36" y1="29" x2="370" y2="29" stroke="#dde5ee"/><text x="27" y="33" text-anchor="end" class="chart-axis">120</text>
+          <path d="M 44 154 L 44,149.21 L 105,145.17 L 166,139.42 L 227,122.23 L 288,90.46 L 288 154 Z" fill="url(#valuation-fill)"/>
+          <polyline points="44,149.21 105,145.17 166,139.42 227,122.23 288,90.46" fill="none" stroke="#10305f" stroke-width="2.5" stroke-linejoin="round"/>
+          <line x1="288" y1="90.45833333333334" x2="349" y2="39.41666666666667" stroke="#b48a2f" stroke-width="2.5" stroke-dasharray="5 4"/>
+          <a href="https://www.anduril.com/news/anduril-raises-usd450-million-in-series-d-funding" target="_blank" rel="noopener noreferrer"><title>2021: Series D, $4.6 billion</title><circle cx="44" cy="149.20833333333334" r="4" fill="#10305f" stroke="#fff" stroke-width="2"/><text x="44" y="136.20833333333334" text-anchor="middle" class="chart-value">$4.6B</text><text x="44" y="174" text-anchor="middle" class="chart-axis">2021</text><text x="44" y="190" text-anchor="middle" class="chart-round">D</text></a>
+<a href="https://www.axios.com/2022/12/02/anduril-capital-raise-billion-defense-technology" target="_blank" rel="noopener noreferrer"><title>2022: Series E, $8.48 billion</title><circle cx="105" cy="145.16666666666666" r="4" fill="#10305f" stroke="#fff" stroke-width="2"/><text x="105" y="132.16666666666666" text-anchor="middle" class="chart-value">$8.48B</text><text x="105" y="174" text-anchor="middle" class="chart-axis">2022</text><text x="105" y="190" text-anchor="middle" class="chart-round">E</text></a>
+<a href="https://www.investing.com/news/stock-market-news/anduril-secures-305-billion-valuation-in-latest-fund-raise-4083710" target="_blank" rel="noopener noreferrer"><title>2024: Series F, $14 billion</title><circle cx="166" cy="139.41666666666666" r="4" fill="#10305f" stroke="#fff" stroke-width="2"/><text x="166" y="126.41666666666666" text-anchor="middle" class="chart-value">$14B</text><text x="166" y="174" text-anchor="middle" class="chart-axis">2024</text><text x="166" y="190" text-anchor="middle" class="chart-round">F</text></a>
+<a href="https://www.investing.com/news/stock-market-news/anduril-secures-305-billion-valuation-in-latest-fund-raise-4083710" target="_blank" rel="noopener noreferrer"><title>2025: Series G, $30.5 billion</title><circle cx="227" cy="122.22916666666667" r="4" fill="#10305f" stroke="#fff" stroke-width="2"/><text x="227" y="109.22916666666667" text-anchor="middle" class="chart-value">$30.5B</text><text x="227" y="174" text-anchor="middle" class="chart-axis">2025</text><text x="227" y="190" text-anchor="middle" class="chart-round">G</text></a>
+<a href="https://jobs.a16z.com/company/anduril" target="_blank" rel="noopener noreferrer"><title>May 2026: Series H, $61 billion</title><circle cx="288" cy="90.45833333333334" r="4" fill="#10305f" stroke="#fff" stroke-width="2"/><text x="288" y="77.45833333333334" text-anchor="middle" class="chart-value">$61B</text><text x="288" y="174" text-anchor="middle" class="chart-axis">May 2026</text><text x="288" y="190" text-anchor="middle" class="chart-round">H</text></a>
+<a href="https://www.reuters.com/business/aerospace-defense/defense-tech-company-anduril-talks-raise-funding-about-100-billion-valuation-2026-07-24/" target="_blank" rel="noopener noreferrer"><title>Reported: unconfirmed second-stage financing target, $110 billion</title><circle cx="349" cy="39.41666666666667" r="4.8" fill="#fff" stroke="#b48a2f" stroke-width="2"/><text x="349" y="26.41666666666667" text-anchor="middle" class="chart-value" style="fill:#997020">$110B*</text><text x="349" y="174" text-anchor="middle" class="chart-axis">Reported</text><text x="349" y="190" text-anchor="middle" class="chart-round">Target*</text></a>
+        </svg>
+        <figcaption>*$110B: reported second-stage target, unconfirmed. <a href="https://www.reuters.com/business/aerospace-defense/defense-tech-company-anduril-talks-raise-funding-about-100-billion-valuation-2026-07-24/" target="_blank" rel="noopener noreferrer">Reuters, July 2026</a>. Completed rounds: <a href="https://www.anduril.com/news/anduril-raises-usd450-million-in-series-d-funding" target="_blank" rel="noopener noreferrer">Anduril</a>, <a href="https://www.axios.com/2022/12/02/anduril-capital-raise-billion-defense-technology" target="_blank" rel="noopener noreferrer">Axios</a>, <a href="https://www.investing.com/news/stock-market-news/anduril-secures-305-billion-valuation-in-latest-fund-raise-4083710" target="_blank" rel="noopener noreferrer">Reuters</a>, <a href="https://jobs.a16z.com/company/anduril" target="_blank" rel="noopener noreferrer">a16z</a>. Milestones equally spaced.</figcaption>
+      </figure>
+      </div>
+      <div class="products">
+        <h2>What they build</h2>
+        <div class="builds">
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 14-9-3-9 3z"/><path d="M12 14v6"/></svg></div><div><div class="t">Autonomous aircraft</div><ul><li><b>Fury:</b> AI wingman jet for F-35s.</li><li><b>Ghost:</b> Army reconnaissance drone.</li><li><b>Altius, Bolt-M:</b> tube and backpack strike drones.</li><li><b>Omen:</b> long-range VTOL drone, new in 2026.</li></ul></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c3 3 4 8 4 12l-4 4-4-4c0-4 1-9 4-12z"/><path d="M8 14l-3 2 2 3M16 14l3 2-2 3"/></svg></div><div><div class="t">Missiles &amp; interceptors</div><ul><li><b>Barracuda:</b> mass-produced cruise missile.</li><li><b>Roadrunner:</b> reusable jet interceptor.</li><li><b>Rocket motors:</b> 6,000 a year in Mississippi.</li></ul></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21V9"/><path d="M8 21h8"/><path d="M7 7a7 7 0 0 1 10 0"/><path d="M4 4a11 11 0 0 1 16 0"/><circle cx="12" cy="9" r="1.5"/></svg></div><div><div class="t">Sensors &amp; scanners</div><ul><li><b>Sentry towers:</b> border and base security.</li><li><b>Wisp:</b> infrared camera that spots threats itself.</li><li><b>Seabed Sentry:</b> ocean-floor sensor nodes.</li></ul></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 8v5M9.5 11.5L12 13l2.5-1.5"/></svg></div><div><div class="t">Air &amp; space defense</div><ul><li><b>Anvil:</b> rams hostile drones out of the sky.</li><li><b>Pulsar:</b> jammer in U.S. service.</li><li><b>Golden Dome:</b> space interceptor prototypes.</li><li><b>Anduril-26:</b> first satellite, launched July 2026.</li></ul></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 13c3-5 7-5 9 0s6 5 9 0"/><path d="M6 8l5 2 6-2-2 4"/><path d="M10 5v3"/></svg></div><div><div class="t">Underwater vehicles</div><ul><li><b>Ghost Shark:</b> extra-large sub, U.S. and Australia.</li><li><b>Dive-LD:</b> long-range sub in Navy service.</li><li><b>Copperhead:</b> torpedo drone fired from subs.</li><li><b>Surface vessels:</b> unmanned ships with HD Hyundai.</li></ul></div></div>
+          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 16 0v3H4z"/><path d="M4 15h16M9 15v3h6v-3"/><path d="M14 10h3"/></svg></div><div><div class="t">Soldier &amp; command systems</div><ul><li><b>EagleEye:</b> mixed-reality helmet from Microsoft.</li><li><b>Menace:</b> command center in a container.</li></ul></div></div>
+        </div>
       <div class="more">
         <h2>Customers</h2>
         <ul>
@@ -417,17 +518,6 @@
           <li><b>Allies:</b> Australia, Taiwan, UAE, Poland, and Kuwait.</li>
         </ul>
       </div>
-      </div>
-      <div>
-        <h2>What they build</h2>
-        <div class="builds">
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 14-9-3-9 3z"/><path d="M12 14v6"/></svg></div><div><div class="t">Autonomous aircraft</div><ul><li><b>Fury:</b> AI wingman jet for F-35s.</li><li><b>Ghost:</b> Army reconnaissance drone.</li><li><b>Altius, Bolt-M:</b> tube and backpack strike drones.</li><li><b>Omen:</b> long-range VTOL drone, new in 2026.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c3 3 4 8 4 12l-4 4-4-4c0-4 1-9 4-12z"/><path d="M8 14l-3 2 2 3M16 14l3 2-2 3"/></svg></div><div><div class="t">Missiles &amp; interceptors</div><ul><li><b>Barracuda:</b> mass-produced cruise missile.</li><li><b>Roadrunner:</b> reusable jet interceptor.</li><li><b>Rocket motors:</b> 6,000 a year in Mississippi.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21V9"/><path d="M8 21h8"/><path d="M7 7a7 7 0 0 1 10 0"/><path d="M4 4a11 11 0 0 1 16 0"/><circle cx="12" cy="9" r="1.5"/></svg></div><div><div class="t">Sensors &amp; scanners</div><ul><li><b>Sentry towers:</b> border and base security.</li><li><b>Wisp:</b> infrared camera that spots threats itself.</li><li><b>Seabed Sentry:</b> ocean-floor sensor nodes.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 8v5M9.5 11.5L12 13l2.5-1.5"/></svg></div><div><div class="t">Air &amp; space defense</div><ul><li><b>Anvil:</b> rams hostile drones out of the sky.</li><li><b>Pulsar:</b> jammer in U.S. service.</li><li><b>Golden Dome:</b> space interceptor prototypes.</li><li><b>Anduril-26:</b> first satellite, launched July 2026.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 13c3-5 7-5 9 0s6 5 9 0"/><path d="M6 8l5 2 6-2-2 4"/><path d="M10 5v3"/></svg></div><div><div class="t">Underwater vehicles</div><ul><li><b>Ghost Shark:</b> extra-large sub, U.S. and Australia.</li><li><b>Dive-LD:</b> long-range sub in Navy service.</li><li><b>Copperhead:</b> torpedo drone fired from subs.</li><li><b>Surface vessels:</b> unmanned ships with HD Hyundai.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 16 0v3H4z"/><path d="M4 15h16M9 15v3h6v-3"/><path d="M14 10h3"/></svg></div><div><div class="t">Soldier &amp; command systems</div><ul><li><b>EagleEye:</b> mixed-reality helmet from Microsoft.</li><li><b>Menace:</b> command center in a container.</li></ul></div></div>
-        </div>
       </div>
     </div>
 
