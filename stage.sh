@@ -11,8 +11,9 @@ for DIR in "${DIRS[@]}"; do
   [ -f "$DIR/raindrop.html" ] || { echo "skip $DIR: no raindrop.html (run ./render.sh $DIR first)"; continue; }
   mkdir -p "site/$DIR/assets"
   sed -e 's#<meta name="viewport"#<meta name="robots" content="noindex, nofollow">\n<meta name="viewport"#' \
-      -e "s#\(src=\"assets/[^\"]*\)\"#\1?v=$V\"#g" "$DIR/raindrop.html" > "site/$DIR/index.html"
-  for f in $(grep -o 'src="assets/[^"?]*' "$DIR/raindrop.html" | sed 's#src="##' | sort -u); do [ -f "$DIR/$f" ] && cp "$DIR/$f" "site/$DIR/assets/"; done
+      -e "s#\(\(src\|href\)=\"assets/[^\"]*\)\"#\1?v=$V\"#g" "$DIR/raindrop.html" > "site/$DIR/index.html"
+  # every local image: <img src=...> and the SVG <image href=...> that holds the logo inside the raindrop
+  for f in $(grep -o '\(src\|href\)="assets/[^"?]*' "$DIR/raindrop.html" | sed 's#.*="##' | sort -u); do [ -f "$DIR/$f" ] && cp "$DIR/$f" "site/$DIR/assets/"; done
   [ -f "$DIR/raindrop.pdf" ] && cp "$DIR/raindrop.pdf" "site/$DIR/raindrop.pdf"
   LATEST="$DIR"
 done
