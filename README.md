@@ -32,19 +32,49 @@ Raindrops/
 
 ## Editing an issue
 
-**From the browser (no tools needed).** Open the live page with `?edit=1` on the end, for example
-https://benmartinrainmaker.github.io/rainmaker-raindrop/2026-10-anduril/?edit=1 . Every piece of
-text gets a dashed outline: click it, type, press Enter or click elsewhere when done. Cmd+B and
-Cmd+I bold and italicize. Then press **Save & publish**. The first time, enter your name and the
-editing key (Ben has it); it stays in that browser. The save writes `content.md` into the GitHub
-repo and the page rebuilds itself in about two minutes. If the Save complains that someone else
-changed the text, reload the page and redo the edit. **Download content.md** gives you the edited
-file instead, for sending to Ben. Photos, the chart, and the logos are not editable this way.
+### Editing from your browser (no tools needed)
 
-**From a text editor or an AI tool.** Clone the repo (https://github.com/BenMartinRainmaker/rainmaker-raindrop),
-edit `content.md`, and push to `main`; the Action publishes. Locally, `./render.sh <folder>`
-rebuilds the page and PDF so you can check the one-page limit before pushing, and `./publish.sh`
-commits and pushes everything.
+**1. Open the editor.** Take the live link for the month and add `?edit=1` to the end:
+
+```
+https://benmartinrainmaker.github.io/rainmaker-raindrop/2026-10-anduril/?edit=1
+```
+
+A white "Edit mode" box appears in the top-left corner and every piece of text on the page gets
+a dashed gold outline. Bookmark that link; it is the editor.
+
+**2. Make your edits.** Click any outlined text and type. It works for the two paragraphs at the
+top, the quote, the chips, the big numbers and their labels, the photo captions, every product
+bullet and category name, the customers list, the Lattice band, the timeline, the footer, and the
+fine print. Press Enter or click elsewhere when you are done with a block. Blue outlines mark what
+you have changed. Cmd+B makes bold, Cmd+I makes italic. Photos, the chart, and logos cannot be
+edited this way; ask Ben for those.
+
+**3. Save.** Click **Save & publish** in the Edit mode box. The first time, it asks for your name
+and the editing key (get it from Ben); enter both and click **Use key**. The browser remembers them,
+so next time Save just saves. You will see "Saved" in the box. The page rebuilds itself and the
+new text is live at the normal link in about two minutes. Reload to see it.
+
+**If something goes wrong.**
+- "Nothing changed yet": you have not altered any text.
+- "That editing key was not accepted": the key was mistyped or revoked. Enter it again.
+- "Someone else changed the text since this page was built": another editor saved first. Click
+  **Download content.md** to keep a copy of your version, reload the page a minute later, and
+  redo your edits on the fresh text.
+- No key at all: click **Download content.md** and email the file to Ben.
+- **Exit** leaves edit mode. If you leave with unsaved changes the browser warns you.
+
+Only the text is editable, so the layout cannot break. If your edit makes the printed page spill
+onto a second sheet, the site still publishes, and Ben sees a warning in the build log.
+
+### Editing with a text editor or an AI tool
+
+Clone the repo (https://github.com/BenMartinRainmaker/rainmaker-raindrop), edit `content.md`,
+and push to `main`; the Action publishes. Locally, `./render.sh <folder>` rebuilds the page and
+PDF so you can check the one-page limit before pushing, and `./publish.sh "message"` commits and
+pushes everything.
+
+### How content.md is laid out
 
 All the words live in `content.md`. Open it in any text editor (TextEdit, VS Code, Notes), change
 the text, save, then run `./render.sh <folder>`. The page, PDF, and share files are rebuilt.
