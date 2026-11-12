@@ -11,8 +11,8 @@ The private market has split into two distinct tiers! At the top, the hottest te
 Against this backdrop, Rainmaker Securities presents Anduril as the November 2026 Raindrop of the Month! Founded in 2017, Anduril has rapidly established itself at the forefront of modern homeland defense. Rather than sending thousands of foot soldiers into enemy territory, Anduril builds battle-ready machines and sensors designed to be controlled from overseas. From AI-piloted vehicles to its state-of-the-art device Lattice, an AI command system coordinating and directing machines simultaneously, Anduril has revolutionized the frontier of warfare. In less than a decade, it has cemented itself among the most closely watched private companies and one of the most requested names on our desk.
 
 # Quote
-"We have consistently doubled revenue every year. So even over a billion dollars, we're still doubling revenue."
-Brian Schimpf, Anduril CEO, Sourcery podcast, December 2025
+"We need to design missiles that can be made in car factories."
+Palmer Luckey, Anduril founder, AIAA interview, October 2026
 
 # Tags
 Sector: Defense technology · AI

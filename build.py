@@ -205,8 +205,8 @@ def valuation(sec, company):
         cx, cy = xs[-1], y(rep["val"])
         dashed = '<line x1="%.2f" y1="%.2f" x2="%.2f" y2="%.2f" stroke="#b48a2f" stroke-width="2.5" stroke-dasharray="5 4"/>' % (xs[len(pts) - 1], y(pts[-1]["val"]), cx, cy)
         dots += ('<a href="%s" target="_blank" rel="noopener noreferrer"><title>%s</title><circle cx="%.0f" cy="%.2f" r="4.8" fill="#fff" stroke="#b48a2f" stroke-width="2"/>'
-                 '<text x="%.0f" y="%.2f" text-anchor="middle" class="chart-value" style="fill:#997020">$%s%s*</text><text x="%.0f" y="174" text-anchor="middle" class="chart-axis">Reported</text>'
-                 '<text x="%.0f" y="190" text-anchor="middle" class="chart-round">Target*</text></a>\n'
+                 '<text x="%.0f" y="%.2f" text-anchor="middle" class="chart-value" style="fill:#997020">$%s%s*</text><text x="%.0f" y="174" text-anchor="middle" class="chart-axis">Latest</text>'
+                 '<text x="%.0f" y="190" text-anchor="middle" class="chart-round">valuation</text></a>\n'
                  % (html.escape(rep["url"]), html.escape(rep["title"]), cx, cy, cx, cy - 13, fmt_val(rep["val"]), unit, cx, cx))
     desc = "Completed rounds: " + "; ".join("%s %s, $%s %s" % (p["label"], p["series"], fmt_val(p["val"]), word) for p in pts) + "."
     if rep:
