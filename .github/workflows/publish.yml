@@ -1,0 +1,39 @@
+# Renders every month folder and publishes site/ to GitHub Pages on every push to main,
+# including saves from the page's web edit mode (?edit=1), which commit content.md directly.
+name: Render and publish
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Render every month (page, PDF, preview, share copy)
+        run: |
+          for d in $(ls -d 20*-*/ | sed 's#/$##' | sort); do
+            ./render.sh "$d" || echo "::warning title=$d::PDF is longer than one printed page. Trim text in content.md."
+          done
+      - name: Stage the website folder
+        run: ./stage.sh
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

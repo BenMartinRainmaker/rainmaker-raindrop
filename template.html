@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Raindrop of the Month · November 2026 · Anduril</title>
+<title>Raindrop of the Month · {{month}} · {{company}}</title>
 <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   /* ===== BRAND COLORS: change here and everything follows ===== */
@@ -70,7 +69,7 @@
   .stat .l{ font-size:7.8pt; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-top:2px; }
   .stat .s{ font-size:8pt; color:var(--ink-2); }
   .quote{ font-size:9pt; font-style:italic; color:var(--navy); line-height:1.3; padding-left:.14in; border-left:2px solid var(--gold-bright); align-self:center; min-width:0; }
-  .quote span{ display:block; font-style:normal; font-size:7pt; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-top:3px; }
+  .quote .who{ display:block; font-style:normal; font-size:7pt; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-top:3px; }
 
   h2{ font-size:8pt; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:.06in; }
 
@@ -166,7 +165,7 @@
     .chip{ font-size:7pt; padding:2px 8px; }
     .intro p{ font-size:8.7pt; line-height:1.3; margin-top:.04in; }
     .stat .n{ font-size:17pt; }
-    .quote{ font-size:8.2pt; line-height:1.25; padding-left:.12in; } .quote span{ font-size:6.4pt; margin-top:2px; }
+    .quote{ font-size:8.2pt; line-height:1.25; padding-left:.12in; } .quote .who{ font-size:6.4pt; margin-top:2px; }
     .stats{ padding:.04in 0; }
     .lattice{ padding:.05in .18in; } .lattice .d{ font-size:7.8pt; line-height:1.26; }
     .tl .x{ font-size:7.5pt; line-height:1.28; }
@@ -210,7 +209,7 @@
     .stat .n{ font-size:30px; }
     .stat .l{ font-size:11px; margin-top:4px; }
     .stat .s{ font-size:13px; margin-top:3px; }
-    .quote{ font-size:15px; line-height:1.4; padding-left:16px; } .quote span{ font-size:11px; margin-top:5px; }
+    .quote{ font-size:15px; line-height:1.4; padding-left:16px; } .quote .who{ font-size:11px; margin-top:5px; }
     h2{ font-size:12px; margin-bottom:10px; }
     .mid{ grid-template-columns:minmax(0,.95fr) minmax(0,1.2fr); gap:26px; }
     .mid{ align-items:stretch; }
@@ -386,6 +385,22 @@
     .pill.x img{ height:.13in; }
     .cta{ flex-direction:row; gap:.1in; }
   }
+  /* edit mode (only when the URL ends in ?edit=1): click any text and type, then Save */
+  .edit-bar{ position:fixed; top:12px; left:12px; z-index:50; display:flex; flex-wrap:wrap; gap:8px; align-items:center; background:#fff; color:var(--navy); border:1px solid var(--gold-bright); border-radius:10px; padding:8px 10px; box-shadow:0 6px 24px rgba(6,21,48,.25); font:500 13px/1.3 "Jost",sans-serif; max-width:min(92vw,600px); }
+  .edit-bar b{ font-weight:600; }
+  .edit-bar button{ font:inherit; font-weight:600; border:0; border-radius:999px; padding:7px 14px; cursor:pointer; background:var(--navy); color:#fff; }
+  .edit-bar button.alt{ background:#eef5fb; color:var(--navy); }
+  .edit-bar button:disabled{ opacity:.5; cursor:default; }
+  .edit-bar input{ font:inherit; padding:6px 8px; border:1px solid #b9c7d8; border-radius:6px; width:240px; max-width:100%; }
+  .edit-bar .msg{ flex-basis:100%; color:var(--ink); }
+  .edit-bar .msg.err{ color:#9b2c2c; }
+  .edit-bar .row[hidden]{ display:none; }
+  .edit-bar .row{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; flex-basis:100%; }
+  body.editing [data-ed]{ outline:1px dashed rgba(180,138,47,.75); outline-offset:2px; cursor:text; border-radius:2px; }
+  body.editing [data-ed]:hover{ background:rgba(212,175,55,.14); }
+  body.editing [data-ed]:focus{ outline:2px solid var(--rain); background:#fff; }
+  body.editing [data-ed].changed{ outline:2px solid var(--rain); }
+  @media print{ .edit-bar{ display:none !important; } body.editing [data-ed]{ outline:none; } }
 </style>
 </head>
 <body>
@@ -405,20 +420,20 @@
   <!-- ===== 1. HEADER BAR (brand mark, title, month) ===== -->
   <div class="scroll"><!-- header + content scroll together on screen; footer stays pinned -->
   <div class="bar">
-    <div class="brand"><span class="brand-seal"><img src="assets/rainmaker_official_gold.svg?v=1794441688" alt="Rainmaker Securities logo"></span><div class="wm">RAINMAKER<small>SECURITIES</small></div></div>
+    <div class="brand"><span class="brand-seal"><img src="assets/rainmaker_official_gold.svg" alt="Rainmaker Securities logo"></span><div class="wm">RAINMAKER<small>SECURITIES</small></div></div>
     <div class="issue"><span>Raindrop of the Month</span></div>
-    <div class="date">November 2026</div>
+    <div class="date">{{month}}</div>
   </div>
 
   <!-- ===== 1b. MARKET CONTEXT + COMPANY INTRODUCTION ===== -->
-  <div class="top"><div class="note"><p>The private market has split into two distinct tiers! At the top, the hottest tech companies command the strongest demand. Anthropic’s employees declined to sell shares at the $350B tender price in April, and within weeks, secondary desks were pricing the company north of $1 trillion. Now, with the IPO in focus, price talk is in the $1.3T+ range. OpenAI’s $7B August tender cleared flat at $852B, while its rival now trades above it on the secondary tape. Databricks is changing hands at or above its $190B round while its IPO drifts to 2027. Beyond these headliners, the picture looks markedly different. Trading volume on Rainmaker jumped 57% quarter over quarter in Q3, yet roughly 84% of trades cleared below the last primary valuation. Liquidity is abundant, but it’s only flowing into a handful of names, and sellers elsewhere are accepting discounts to complete trades. With the IPO window stuck half-open, secondaries aren’t the side door anymore. They have become the main route to liquidity, and buyer access is limited.</p><p>Against this backdrop, Rainmaker Securities presents Anduril as the November 2026 Raindrop of the Month! Founded in 2017, Anduril has rapidly established itself at the forefront of modern homeland defense. Rather than sending thousands of foot soldiers into enemy territory, Anduril builds battle-ready machines and sensors designed to be controlled from overseas. From AI-piloted vehicles to its state-of-the-art device Lattice, an AI command system coordinating and directing machines simultaneously, Anduril has revolutionized the frontier of warfare. In less than a decade, it has cemented itself among the most closely watched private companies and one of the most requested names on our desk.</p></div></div>
+  <div class="top"><div class="note">{{market_note}}{{introduction}}</div></div>
 
-  <main class="content" tabindex="0" aria-label="Anduril company profile">
+  <main class="content" tabindex="0" aria-label="{{company}} company profile">
 
     <!-- ===== 2. HERO: raindrop + company name, subtitle, quote, company tags ===== -->
     <div class="hero">
       <div class="drop">
-        <svg viewBox="0 0 140 160" role="img" aria-label="Glass-blue raindrop with the Anduril logo, November 2026">
+        <svg viewBox="0 0 140 160" role="img" aria-label="Glass-blue raindrop with the {{company}} logo, {{month}}">
           <defs>
             <path id="water-shape" d="M70 5C61 24 20 65 20 99a50 50 0 0 0 100 0C120 65 79 24 70 5Z"/>
             <radialGradient id="body" cx="31%" cy="29%" r="83%"><stop stop-color="#e3faff"/><stop offset=".28" stop-color="#91dcf8"/><stop offset=".56" stop-color="#3ba6dd"/><stop offset=".82" stop-color="#1266aa"/><stop offset="1" stop-color="#062d63"/></radialGradient>
@@ -437,98 +452,48 @@
             <path d="M32 72C37 57 47 43 54 34" fill="none" stroke="#fff" stroke-width="2" opacity=".85" stroke-linecap="round"/>
             <ellipse cx="36" cy="113" rx="2.4" ry="3.8" fill="#e5faff" opacity=".7" transform="rotate(-25 36 113)"/>
           </g>
-          <image href="assets/anduril_icon_navy.png" x="46" y="74" width="48" height="48"/>
-          <text x="70" y="132" text-anchor="middle" fill="#061530" font-family="Jost, sans-serif" font-size="7" font-weight="600" letter-spacing="1.1">NOV 2026</text>
+          <image href="{{drop_logo}}" x="46" y="74" width="48" height="48"/>
+          <text x="70" y="132" text-anchor="middle" fill="#061530" font-family="Jost, sans-serif" font-size="7" font-weight="600" letter-spacing="1.1">{{month_short}}</text>
         </svg>
       </div>
       <div class="company-title">
-        <h1><img class="wordmark" src="assets/anduril_official_wordmark.svg?v=1794441688" alt="Anduril"></h1>
-        <div class="sub">Robotic Defense and AI Command Systems</div>
+        <h1>{{company_name}}</h1>
+        <div class="sub">{{subtitle}}</div>
       </div>
-    <div class="quote">&ldquo;We have consistently doubled revenue every year. So even over a billion dollars, we’re still doubling revenue.&rdquo;<span>Brian Schimpf, Anduril CEO, Sourcery podcast, December 2025</span></div>
+    {{quote}}
       <div class="chips">
-        <span class="chip"><b>Sector</b> &nbsp;Defense technology · AI</span>
-        <span class="chip"><b>Stage</b> &nbsp;Series H · $61B</span>
-        <span class="chip"><b>HQ</b> &nbsp;Costa Mesa, CA</span>
-        <span class="chip"><b>Founded</b> &nbsp;2017</span>
-        <span class="chip"><b>CEO</b> &nbsp;Brian Schimpf</span>
+{{tags}}
       </div>
     </div>
 
     <!-- ===== 3. KEY NUMBERS ===== -->
     <div class="stats">
-      <div class="stat"><div class="n">$110B</div><div class="l">Valuation</div><div class="s">Latest reported, October 2026</div></div>
-      <div class="stat"><div class="n">$5.0B</div><div class="l">Primary raise</div><div class="s">Series H at $61B, May 2026</div></div>
-      <div class="stat"><div class="n">$2.2B</div><div class="l">2025 revenue</div><div class="s">Up 120% year over year</div></div>
-      <div class="stat"><div class="n">$20B</div><div class="l">Army contract</div><div class="s">10-year ceiling, March 2026</div></div>
+{{key_numbers}}
     </div>
 
     <!-- ===== 4. PHOTO CAROUSEL + VALUATION (left), PRODUCTS + CUSTOMERS (right) ===== -->
     <div class="mid">
       <div class="left">
       <div class="photo">
-        <img class="on" src="assets/fury_amraam.jpg?v=1794441688" alt="YFQ-44A Fury firing an AIM-120">
-        <img src="assets/lattice_screen.jpg?v=1794441688" alt="Lattice command screen on a wall display">
-        <img src="assets/anvil_launch.jpg?v=1794441688" alt="Anvil interceptor launching" style="object-position:50% 40%">
-        <img src="assets/falcon9_transporter17.jpg?v=1794441688" alt="Falcon 9 launch carrying Anduril-26" style="object-position:50% 60%">
-        <img src="assets/ghostx_flight.jpg?v=1794441688" alt="Ghost-X drone in flight" style="object-position:60% 40%">
-        <img src="assets/sentry_b52.jpg?v=1794441688" alt="Sentry sensor head with a B-52 behind">
-        <img src="assets/dive_ld_crop.jpg?v=1794441688" alt="Dive-LD autonomous submarine" style="object-position:50% 100%">
+{{photo_imgs}}
         <div class="nav prev" onclick="slide(-1)">&#8249;</div>
         <div class="nav next" onclick="slide(1)">&#8250;</div>
-        <div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="dots">{{photo_dots}}</div>
         <div class="cap">
-          <span class="on"><b>Live fire.</b> A YFQ-44A Fury fires an AIM-120 AMRAAM over the Mojave Desert, July 2026. The first missile shot by any U.S. drone of its class. U.S. Air Force photo.</span>
-          <span><b>Lattice.</b> The command screen on the wall during an Air Force Advanced Battle Management System demo, tracking Anduril sentry towers across White Sands, September 2020. U.S. Air Force photo.</span>
-          <span><b>Anvil.</b> Anduril’s interceptor drone leaving its launch box to run down a hostile drone at Minot AFB, October 2025. DoD photo.</span>
-          <span><b>Anduril-26.</b> The company’s first satellite rode this Falcon 9 out of Vandenberg on July 7, 2026. It is now tasked from orbit through Lattice. U.S. Space Force photo.</span>
-          <span><b>Ghost-X.</b> Anduril’s autonomous reconnaissance drone on its first National Guard flights, New Jersey, September 2026. U.S. Army photo.</span>
-          <span><b>Sentry.</b> The sensor head of Anduril’s counter-drone sentry scanning the Minot flightline as a B-52 climbs out, October 2025. DoD photo.</span>
-          <span><b>Dive-LD.</b> Anduril’s autonomous submarine going into the water at the Navy’s Keyport, Washington, range. U.S. Navy photo.</span>
+{{photo_caps}}
         </div>
       </div>
-      <figure class="valuation" aria-labelledby="valuation-title">
-        <div class="chart-heading"><h2 id="valuation-title">Valuation history</h2><span>Funding milestones · USD billions</span></div>
-        <svg viewBox="0 0 400 205" role="img" aria-labelledby="valuation-svg-title valuation-svg-desc">
-          <title id="valuation-svg-title">Anduril valuation milestones, ending at a reported $110 billion target</title>
-          <desc id="valuation-svg-desc">Completed rounds: 2021 Series D, $4.6 billion; 2022 Series E, $8.48 billion; 2024 Series F, $14 billion; 2025 Series G, $30.5 billion; May 2026 Series H, $61 billion. The dashed gold extension ends at $110 billion, reported: unconfirmed second-stage financing target, not a completed round. Milestones are equally spaced; the vertical axis is linear in USD billions.</desc>
-          <defs><linearGradient id="valuation-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#2f7fc0" stop-opacity=".24"/><stop offset="1" stop-color="#2f7fc0" stop-opacity=".02"/></linearGradient></defs>
-          <line x1="36" y1="154.00" x2="370" y2="154.00" stroke="#dde5ee"/><text x="27" y="158.00" text-anchor="end" class="chart-axis">0</text>
-<line x1="36" y1="112.33" x2="370" y2="112.33" stroke="#dde5ee"/><text x="27" y="116.33" text-anchor="end" class="chart-axis">40</text>
-<line x1="36" y1="70.67" x2="370" y2="70.67" stroke="#dde5ee"/><text x="27" y="74.67" text-anchor="end" class="chart-axis">80</text>
-<line x1="36" y1="29.00" x2="370" y2="29.00" stroke="#dde5ee"/><text x="27" y="33.00" text-anchor="end" class="chart-axis">120</text>
-          <path d="M 44 154 L 44,149.21 L 105,145.17 L 166,139.42 L 227,122.23 L 288,90.46 L 288 154 Z" fill="url(#valuation-fill)"/>
-          <polyline points="44,149.21 105,145.17 166,139.42 227,122.23 288,90.46" fill="none" stroke="#10305f" stroke-width="2.5" stroke-linejoin="round"/>
-          <line x1="288.00" y1="90.46" x2="349.00" y2="39.42" stroke="#b48a2f" stroke-width="2.5" stroke-dasharray="5 4"/>
-          <a href="https://www.anduril.com/news/anduril-raises-usd450-million-in-series-d-funding" target="_blank" rel="noopener noreferrer"><title>2021: Series D, $4.6 billion</title><circle cx="44" cy="149.21" r="4" fill="#10305f" stroke="#fff" stroke-width="2"/><text x="44" y="136.21" text-anchor="middle" class="chart-value">$4.6B</text><text x="44" y="174" text-anchor="middle" class="chart-axis">2021</text><text x="44" y="190" text-anchor="middle" class="chart-round">D</text></a>
-<a href="https://www.axios.com/2022/12/02/anduril-capital-raise-billion-defense-technology" target="_blank" rel="noopener noreferrer"><title>2022: Series E, $8.48 billion</title><circle cx="105" cy="145.17" r="4" fill="#10305f" stroke="#fff" stroke-width="2"/><text x="105" y="132.17" text-anchor="middle" class="chart-value">$8.48B</text><text x="105" y="174" text-anchor="middle" class="chart-axis">2022</text><text x="105" y="190" text-anchor="middle" class="chart-round">E</text></a>
-<a href="https://www.investing.com/news/stock-market-news/anduril-secures-305-billion-valuation-in-latest-fund-raise-4083710" target="_blank" rel="noopener noreferrer"><title>2024: Series F, $14 billion</title><circle cx="166" cy="139.42" r="4" fill="#10305f" stroke="#fff" stroke-width="2"/><text x="166" y="126.42" text-anchor="middle" class="chart-value">$14B</text><text x="166" y="174" text-anchor="middle" class="chart-axis">2024</text><text x="166" y="190" text-anchor="middle" class="chart-round">F</text></a>
-<a href="https://www.investing.com/news/stock-market-news/anduril-secures-305-billion-valuation-in-latest-fund-raise-4083710" target="_blank" rel="noopener noreferrer"><title>2025: Series G, $30.5 billion</title><circle cx="227" cy="122.23" r="4" fill="#10305f" stroke="#fff" stroke-width="2"/><text x="227" y="109.23" text-anchor="middle" class="chart-value">$30.5B</text><text x="227" y="174" text-anchor="middle" class="chart-axis">2025</text><text x="227" y="190" text-anchor="middle" class="chart-round">G</text></a>
-<a href="https://jobs.a16z.com/company/anduril" target="_blank" rel="noopener noreferrer"><title>May 2026: Series H, $61 billion</title><circle cx="288" cy="90.46" r="4" fill="#10305f" stroke="#fff" stroke-width="2"/><text x="288" y="77.46" text-anchor="middle" class="chart-value">$61B</text><text x="288" y="174" text-anchor="middle" class="chart-axis">May 2026</text><text x="288" y="190" text-anchor="middle" class="chart-round">H</text></a>
-<a href="https://www.reuters.com/business/aerospace-defense/defense-tech-company-anduril-talks-raise-funding-about-100-billion-valuation-2026-07-24/" target="_blank" rel="noopener noreferrer"><title>Reported: unconfirmed second-stage financing target, $110 billion</title><circle cx="349" cy="39.42" r="4.8" fill="#fff" stroke="#b48a2f" stroke-width="2"/><text x="349" y="26.42" text-anchor="middle" class="chart-value" style="fill:#997020">$110B*</text><text x="349" y="174" text-anchor="middle" class="chart-axis">Reported</text><text x="349" y="190" text-anchor="middle" class="chart-round">Target*</text></a>
-        </svg>
-        <figcaption>*$110B: reported second-stage target, unconfirmed. <a href="https://www.reuters.com/business/aerospace-defense/defense-tech-company-anduril-talks-raise-funding-about-100-billion-valuation-2026-07-24/" target="_blank" rel="noopener noreferrer">Reuters, July 2026</a>. Completed rounds: <a href="https://www.anduril.com/news/anduril-raises-usd450-million-in-series-d-funding" target="_blank" rel="noopener noreferrer">Anduril</a>, <a href="https://www.axios.com/2022/12/02/anduril-capital-raise-billion-defense-technology" target="_blank" rel="noopener noreferrer">Axios</a>, <a href="https://www.investing.com/news/stock-market-news/anduril-secures-305-billion-valuation-in-latest-fund-raise-4083710" target="_blank" rel="noopener noreferrer">Reuters</a>, <a href="https://jobs.a16z.com/company/anduril" target="_blank" rel="noopener noreferrer">a16z</a>. Milestones equally spaced.</figcaption>
-      </figure>
+{{valuation}}
       </div>
       <div class="products">
-        <h2>What they build</h2>
+        <h2>{{build_title}}</h2>
         <div class="builds">
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 14-9-3-9 3z"/><path d="M12 14v6"/></svg></div><div><div class="t">Autonomous aircraft</div><ul><li><b>Fury:</b> AI wingman jet for F-35s.</li><li><b>Ghost:</b> Army reconnaissance drone.</li><li><b>Altius, Bolt-M:</b> tube and backpack strike drones.</li><li><b>Omen:</b> long-range VTOL drone, new in 2026.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2c3 3 4 8 4 12l-4 4-4-4c0-4 1-9 4-12z"/><path d="M8 14l-3 2 2 3M16 14l3 2-2 3"/></svg></div><div><div class="t">Missiles &amp; interceptors</div><ul><li><b>Barracuda:</b> mass-produced cruise missile.</li><li><b>Roadrunner:</b> reusable jet interceptor.</li><li><b>Rocket motors:</b> 6,000 a year in Mississippi.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21V9"/><path d="M8 21h8"/><path d="M7 7a7 7 0 0 1 10 0"/><path d="M4 4a11 11 0 0 1 16 0"/><circle cx="12" cy="9" r="1.5"/></svg></div><div><div class="t">Sensors &amp; scanners</div><ul><li><b>Sentry towers:</b> border and base security.</li><li><b>Wisp:</b> infrared camera that spots threats itself.</li><li><b>Seabed Sentry:</b> ocean-floor sensor nodes.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 8v5M9.5 11.5L12 13l2.5-1.5"/></svg></div><div><div class="t">Air &amp; space defense</div><ul><li><b>Anvil:</b> rams hostile drones out of the sky.</li><li><b>Pulsar:</b> jammer in U.S. service.</li><li><b>Golden Dome:</b> space interceptor prototypes.</li><li><b>Anduril-26:</b> first satellite, launched July 2026.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 13c3-5 7-5 9 0s6 5 9 0"/><path d="M6 8l5 2 6-2-2 4"/><path d="M10 5v3"/></svg></div><div><div class="t">Underwater vehicles</div><ul><li><b>Ghost Shark:</b> extra-large sub, U.S. and Australia.</li><li><b>Dive-LD:</b> long-range sub in Navy service.</li><li><b>Copperhead:</b> torpedo drone fired from subs.</li><li><b>Surface vessels:</b> unmanned ships with HD Hyundai.</li></ul></div></div>
-          <div class="item"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 16 0v3H4z"/><path d="M4 15h16M9 15v3h6v-3"/><path d="M14 10h3"/></svg></div><div><div class="t">Soldier &amp; command systems</div><ul><li><b>EagleEye:</b> mixed-reality helmet from Microsoft.</li><li><b>Menace:</b> command center in a container.</li></ul></div></div>
+{{build_items}}
         </div>
       <div class="more">
-        <h2>Customers</h2>
+        <h2>{{customers_title}}</h2>
         <ul>
-          <li><b>U.S. Army:</b> 10-year Lattice contract, $20B ceiling.</li>
-          <li><b>U.S. Air Force:</b> Fury for the CCA fleet.</li>
-          <li><b>U.S. Navy:</b> sub components, Dive-LD, and Roadrunner.</li>
-          <li><b>U.S. Marines:</b> 600+ Bolt-M strike drones.</li>
-          <li><b>Border Protection:</b> 500+ sentry towers ordered.</li>
-          <li><b>Allies:</b> Australia, Taiwan, UAE, Poland, and Kuwait.</li>
+{{customers}}
         </ul>
       </div>
       </div>
@@ -536,34 +501,31 @@
 
     <!-- ===== 5. FEATURE BAND (navy): the one thing to remember about the company ===== -->
     <div class="lattice">
-      <svg viewBox="0 0 60 60" fill="none" stroke="#d4af37" stroke-width="1.4"><circle cx="30" cy="30" r="5" fill="#d4af37"/><circle cx="10" cy="14" r="3"/><circle cx="50" cy="12" r="3"/><circle cx="8" cy="44" r="3"/><circle cx="52" cy="46" r="3"/><circle cx="30" cy="8" r="3"/><circle cx="30" cy="52" r="3"/><path d="M30 30L10 14M30 30L50 12M30 30L8 44M30 30L52 46M30 30V8M30 30V52" opacity=".7"/><path d="M10 14L30 8L50 12M8 44L30 52L52 46" opacity=".35"/></svg>
+      {{feature_icon}}
       <div>
-        <div class="t">Lattice: AI central command</div>
-        <div class="d">Every Anduril system reports into Lattice: a singular AI command and control platform (the AI general of the army). Lattice processes all these feeds at once, calculates, and directs thousands of machines simultaneously to do its bidding in real time.</div>
+        <div class="t">{{feature_title}}</div>
+        <div class="d">{{feature_text}}</div>
       </div>
     </div>
 
     <!-- ===== 6. TIMELINE ===== -->
     <div>
-      <h2>2026 so far</h2>
-      <div class="tl">
-        <div><div class="m">MARCH</div><div class="x">Army signs a ten-year enterprise contract with a $20B ceiling, replacing more than 120 separate procurements. Fury production begins at Arsenal-1 in Ohio.</div></div>
-        <div><div class="m">MAY</div><div class="x">$5B Series H closes at a $61B valuation, led by Thrive Capital and Andreessen Horowitz. Roughly double the June 2025 round.</div></div>
-        <div><div class="m">JULY TO SEPTEMBER</div><div class="x">Fury fires a live AIM-120 AMRAAM, then flies in formation with F-35s. Reuters reports talks for a round near $100B, with a second stage near $110B within a year. Not confirmed by the company.</div></div>
-        <div><div class="m">OCTOBER</div><div class="x">Navy awards up to $2.9B for Virginia-class submarine components, and Anduril commits $3.7B to a new Maryland shipyard. Army adds up to $1.8B to field NGC2 with I Corps.</div></div>
+      <h2>{{timeline_title}}</h2>
+      <div class="tl"{{timeline_style}}>
+{{timeline}}
       </div>
     </div>
 
-    <div class="fine">Rainmaker Securities, LLC. For informational purposes only. Not an offer to buy or sell any security, not a recommendation, and not investment advice. Figures from public reporting as of October 2026. Private securities are illiquid and speculative. rainmakersecurities.com</div>
+    <div class="fine">{{fine_print}}</div>
   </main>
 
   <!-- ===== 7. FOOTER (navy): call to action ===== -->
   </div><!-- /scroll -->
   <div class="foot">
     <div class="row">
-      <div class="say"><b>Holding Anduril or wanting to buy?</b> Rainmaker Securities brokers private shares in Anduril and other late-stage companies. Reach out to your representative or place an order on Rainmaker X.</div>
+      <div class="say">{{footer}}</div>
       <div class="cta">
-        <a class="pill x" href="https://www.rainmaker-x.com/login" target="_blank" rel="noopener"><span>Trade on</span><img src="assets/rainmaker_x_logo.png?v=1794441688" alt="Rainmaker X"></a>
+        <a class="pill x" href="https://www.rainmaker-x.com/login" target="_blank" rel="noopener"><span>Trade on</span><img src="assets/rainmaker_x_logo.png" alt="Rainmaker X"></a>
         <a class="pill" href="https://www.rainmakersecurities.com/" target="_blank" rel="noopener"><svg><use href="#rmark"/></svg><span>Visit <b>Rainmaker Securities</b></span></a>
       </div>
     </div>
@@ -575,10 +537,99 @@
 <script>
   let i=0; const imgs=document.querySelectorAll('.photo img'), caps=document.querySelectorAll('.photo .cap span'), dots=document.querySelectorAll('.dots i');
   function slide(d){ i=(i+d+imgs.length)%imgs.length; [imgs,caps,dots].forEach(l=>l.forEach((e,k)=>e.classList.toggle('on',k===i))); }
-  document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight')slide(1); if(e.key==='ArrowLeft')slide(-1); });
+  document.addEventListener('keydown',e=>{ if(document.activeElement&&document.activeElement.isContentEditable)return; if(e.key==='ArrowRight')slide(1); if(e.key==='ArrowLeft')slide(-1); });
   let tx=null; const ph=document.querySelector('.photo');
   ph.addEventListener('touchstart',e=>{ tx=e.touches[0].clientX; },{passive:true});
   ph.addEventListener('touchend',e=>{ if(tx===null)return; const dx=e.changedTouches[0].clientX-tx; tx=null; if(Math.abs(dx)>40)slide(dx<0?1:-1); },{passive:true});
+</script>
+<!-- ===== EDIT MODE: open the page with ?edit=1, click text, type, Save. Writes content.md to GitHub. ===== -->
+<div id="edit-cfg" hidden data-repo="BenMartinRainmaker/rainmaker-raindrop" data-branch="main" data-path="{{folder}}/content.md"></div>
+<script type="text/plain" id="content-md">{{content_md}}</script>
+<script>
+(function(){
+  if(!/[?&]edit(=|&|$)/.test(location.search)) return;
+  const cfg=document.getElementById('edit-cfg').dataset, KEY='raindrop-gh-token', NAME='raindrop-editor-name';
+  const src=document.getElementById('content-md').textContent.replace(/<\\\//g,'</');
+  const lines=src.split('\n');
+  const els=[...document.querySelectorAll('[data-ed]')];
+  const orig=new Map(els.map(e=>[e,mdOf(e)]));
+
+  function mdOf(el){
+    let s='';
+    (function walk(n){ for(const c of n.childNodes){
+      if(c.nodeType===3){ s+=c.nodeValue; continue; }
+      if(c.nodeType!==1) continue;
+      const t=c.tagName.toLowerCase();
+      if(t==='br'){ s+=' '; }
+      else if(t==='b'||t==='strong'){ s+='**'; walk(c); s+='**'; }
+      else if(t==='i'||t==='em'){ s+='*'; walk(c); s+='*'; }
+      else if(t==='a'){ s+='['; walk(c); s+=']('+c.getAttribute('href')+')'; }
+      else walk(c);
+    } })(el);
+    return s.replace(/ /g,' ').replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/\s+/g,' ').trim();
+  }
+  function changed(){ return els.filter(e=>mdOf(e)!==orig.get(e)); }
+  function newContent(){
+    const out=lines.slice(), drop=new Set();
+    for(const el of changed()){
+      const [kind,...a]=el.dataset.ed.split(':'), t=mdOf(el), n=+a[0];
+      if(kind==='text'){ out[n]=t; for(let k=n+1;k<=+a[1];k++) drop.add(k); }
+      else if(kind==='cell'){ const c=out[n].split('|').map(x=>x.trim()); const i=+a[1]; c[i]=(t===(c[i]||'').toUpperCase())?c[i]:t; out[n]=c.join(' | '); }
+      else if(kind==='bullet'){ out[n]='- '+t.replace(/^\*\*([^*]+?):\*\*\s*/,'$1: '); }
+      else if(kind==='sub'){ const m=lines[n].match(/\s*\([a-z]+\)\s*$/); out[n]='## '+t+(m?m[0]:''); }
+      else if(kind==='tag'){ out[n]=(lines[n].startsWith('- ')?'- ':'')+t.replace(/^\*\*([^*]+?)\*\*\s*/,'$1: '); }
+      else if(kind==='opt'){ out[n]=a[1]+': '+t; }
+      else if(kind==='quote'){ out[n]='"'+t+'"'; }
+    }
+    return out.filter((l,k)=>!drop.has(k)).join('\n');
+  }
+
+  const bar=document.createElement('div'); bar.className='edit-bar';
+  bar.innerHTML='<b>Edit mode</b><span>Click any text and type.</span>'
+    +'<button id="ed-save">Save &amp; publish</button><button class="alt" id="ed-dl">Download content.md</button><button class="alt" id="ed-exit">Exit</button>'
+    +'<div class="row" id="ed-auth" hidden><input id="ed-name" placeholder="Your name"><input id="ed-token" type="password" placeholder="Editing key"><button id="ed-keep">Use key</button></div>'
+    +'<div class="msg" id="ed-msg"></div>';
+  document.body.appendChild(bar); document.body.classList.add('editing');
+  const $=id=>document.getElementById(id), msg=(t,err)=>{ $('ed-msg').textContent=t; $('ed-msg').className='msg'+(err?' err':''); };
+  $('ed-name').value=localStorage.getItem(NAME)||'';
+  els.forEach(e=>{ e.contentEditable='true'; e.spellcheck=true;
+    e.addEventListener('input',()=>e.classList.toggle('changed',mdOf(e)!==orig.get(e)));
+    e.addEventListener('keydown',ev=>{ if(ev.key==='Enter'){ ev.preventDefault(); e.blur(); } });
+    e.addEventListener('click',ev=>{ if(ev.target.closest('a')) ev.preventDefault(); });
+    e.addEventListener('paste',ev=>{ ev.preventDefault(); document.execCommand('insertText',false,(ev.clipboardData||window.clipboardData).getData('text/plain')); });
+  });
+  window.addEventListener('beforeunload',ev=>{ if(changed().length){ ev.preventDefault(); ev.returnValue=''; } });
+
+  $('ed-exit').onclick=()=>{ location.href=location.pathname; };
+  $('ed-dl').onclick=()=>{ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([newContent()],{type:'text/markdown'})); a.download='content.md'; a.click(); msg('Downloaded content.md. Put it in the month folder and run ./render.sh.'); };
+  $('ed-keep').onclick=()=>{ const t=$('ed-token').value.trim(); if(!t){ msg('Paste the editing key first.',true); return; } localStorage.setItem(KEY,t); localStorage.setItem(NAME,$('ed-name').value.trim()); $('ed-auth').hidden=true; save(); };
+  $('ed-save').onclick=save;
+
+  async function save(){
+    const ch=changed();
+    if(!ch.length){ msg('Nothing changed yet.'); return; }
+    const token=localStorage.getItem(KEY);
+    if(!token){ $('ed-auth').hidden=false; msg('First time here: enter your name and the editing key Ben shared, then Save again.'); return; }
+    localStorage.setItem(NAME,$('ed-name').value.trim()||localStorage.getItem(NAME)||'');
+    const api='https://api.github.com/repos/'+cfg.repo+'/contents/'+cfg.path, h={'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'};
+    $('ed-save').disabled=true; msg('Saving '+ch.length+' change'+(ch.length>1?'s':'')+'...');
+    try{
+      const r=await fetch(api+'?ref='+cfg.branch+'&t='+Date.now(),{headers:h});
+      if(r.status===401||r.status===403){ localStorage.removeItem(KEY); $('ed-auth').hidden=false; throw new Error('That editing key was not accepted. Enter it again.'); }
+      if(!r.ok) throw new Error('GitHub replied '+r.status+' when reading content.md.');
+      const cur=await r.json();
+      const remote=decodeURIComponent(escape(atob(cur.content.replace(/\n/g,''))));
+      if(remote.replace(/\r/g,'')!==src.replace(/\r/g,'')){ throw new Error('Someone else changed the text since this page was built. Download your version as a backup, reload the page in a minute, and redo the edits.'); }
+      const who=localStorage.getItem(NAME)||'web editor';
+      const body={message:'Edit '+cfg.path.split('/')[0]+' text (web edit by '+who+')',content:btoa(unescape(encodeURIComponent(newContent()))),sha:cur.sha,branch:cfg.branch};
+      const w=await fetch(api,{method:'PUT',headers:{...h,'Content-Type':'application/json'},body:JSON.stringify(body)});
+      if(!w.ok) throw new Error('GitHub replied '+w.status+' when saving.');
+      ch.forEach(e=>{ orig.set(e,mdOf(e)); e.classList.remove('changed'); });
+      msg('Saved. The page rebuilds itself in about two minutes; reload then to see it live.');
+    }catch(err){ msg(err.message,true); }
+    $('ed-save').disabled=false;
+  }
+})();
 </script>
 </body>
 </html>
