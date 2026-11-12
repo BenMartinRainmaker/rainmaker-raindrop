@@ -68,8 +68,14 @@ the folder layout and editing map. These rules capture what Ben decided over the
 - Lattice is software, so the only usable public-domain picture is the ABMS wall display (Air Force,
   White Sands 2020), cropped to the screen; it is kept as the second slide. Anduril's own satellite
   photos are company images, so the satellite story is told with the Space Force launch photo.
-- Verify every number with a web search for that month. Date the figures. Label reported
-  but unconfirmed rounds as unconfirmed. Use the company's legal name (e.g. Anduril Industries).
+- Verify every number with a web search for that month. Date the figures (the fine print says
+  "as of <issue month>"). Label reported but unconfirmed rounds as unconfirmed. Use the company's
+  legal name (e.g. Anduril Industries).
+- Valuation chart: the dashed gold end point is labeled "Latest valuation" (Ben's call, Nov 2026),
+  with the asterisk and caption carrying the "reported, unconfirmed" wording.
+- Quote: recent (within the last few months) and engaging, from the founder or CEO, with the venue
+  and month in the attribution. Verify the wording against the source article. Before replacing a
+  quote or paragraph Ben may want back, copy content.md to `archive/content-before-<what>-<date>.md`.
 
 ## Workflow
 - Delivery is the web link. Ben sends the interactive page to clients as a newsletter, so it must

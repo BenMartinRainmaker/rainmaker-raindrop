@@ -97,7 +97,7 @@ How `content.md` is laid out:
   - Key numbers: `$110B | Valuation | note under it`
   - Photos: `assets/file.jpg | alt text | caption | 50% 40%` (last column optional; shifts the crop)
   - Valuation history: `2024 | Series F | 14 | source url`; `reported: 110 | url | note` adds the
-    dashed unconfirmed target; `caption:` is the small print under the chart. Axis scales itself.
+    dashed gold point labeled "Latest valuation" with an asterisk (explain it in `caption:`); `caption:` is the small print under the chart. Axis scales itself.
   - Timeline: `March | what happened`. Four rows fit the print page; other counts still work.
 - What they build: each `## Category name (icon)` starts a box with its bullets under it. Icons:
   aircraft, missile, sensor, shield, underwater, soldier, rocket, chip, cloud, building, factory,
