@@ -97,4 +97,4 @@ October | Navy awards up to $2.9B for Virginia-class submarine components, and A
 **Holding Anduril or wanting to buy?** Rainmaker Securities brokers private shares in Anduril and other late-stage companies. Reach out to your representative or place an order on Rainmaker X.
 
 # Fine print
-Rainmaker Securities, LLC. For informational purposes only. Not an offer to buy or sell any security, not a recommendation, and not investment advice. Figures from public reporting as of October 2026. Private securities are illiquid and speculative. rainmakersecurities.com
+Rainmaker Securities, LLC. For informational purposes only. Not an offer to buy or sell any security, not a recommendation, and not investment advice. Figures from public reporting as of November 2026. Private securities are illiquid and speculative. rainmakersecurities.com
