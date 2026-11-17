@@ -11,7 +11,7 @@ Each take has both normal and email editions. Edit its `content.md` once for bot
 
 Normal: `raindrop.html`, `raindrop.pdf` (one page), `preview.png`. Email: `email/raindrop-email.html`, `email/raindrop-email.txt`, raster `email/assets/`. Open `email/preview.html` locally to review images before deployment. Send only production HTML after hosting the assets and client testing.
 
-The email preserves the original one-page print composition, including the initial Fury/AMRAAM photo, as linked PNG sections. Main artwork links to the web edition; the two footer CTAs keep their direct destinations. The separate text file provides the text alternative.
+The email preserves the normal desktop browser composition, including the initial Fury/AMRAAM photo, as linked PNG sections. Main artwork links to the web edition; the two footer CTAs keep their direct destinations. The separate text file provides the text alternative.
 
 Old URLs are staged as aliases through `url-aliases.json`. Shared instructions are in `../mainguidelines/README.md`.
 
@@ -22,4 +22,6 @@ Old URLs are staged as aliases through `url-aliases.json`. Shared instructions a
 | With sentiment | [Web](https://benmartinrainmaker.github.io/rainmaker-raindrop/2026-11-anduril/) | [Email](https://benmartinrainmaker.github.io/rainmaker-raindrop/2026-11-anduril/email/raindrop-email.html) |
 | Without sentiment | [Web](https://benmartinrainmaker.github.io/rainmaker-raindrop/2026-11-anduril/versions/without-market-commentary/) | [Email](https://benmartinrainmaker.github.io/rainmaker-raindrop/2026-11-anduril/versions/without-market-commentary/email/raindrop-email.html) |
 
-The email-friendly versions preserve the matching original artwork, including the sentiment paragraph only in the with-sentiment take. These URLs serve the production HTML with hosted PNGs; do not share the local `preview.html`.
+The email-friendly versions preserve the matching normal browser artwork, including the sentiment paragraph only in the with-sentiment take. These URLs serve the production HTML with hosted PNGs; do not share the local `preview.html`.
+
+Email visual reference: use the normal browser page, not the one-page PDF. Preserve the normal screen type sizes and keep Trade on Rainmaker X stacked above Visit Rainmaker Securities. Capture removes scrolling, not screen styling.

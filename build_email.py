@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build an email-safe visual match of the original one-page Raindrop.
+"""Build an email-safe visual match of the normal desktop screen Raindrop.
 Usage: python3 build_email.py <issue-folder> [--asset-base https://cdn.example.com/raindrops]
 The email uses linked PNG sections, presentation tables, and a plain-text companion.
 """
@@ -46,12 +46,14 @@ def build_email(folder,asset_base=HOST):
                   '</td></tr>' for i,band in enumerate(layout['bands']))
     footer_cells=[]
     allocated=0
-    for i,part in enumerate(layout['footer']):
-        w=round(part['width']*ratio) if i<len(layout['footer'])-1 else display_width-allocated
+    for i,column in enumerate(layout['footerColumns']):
+        w=round(column['width']*ratio) if i<len(layout['footerColumns'])-1 else display_width-allocated
         allocated+=w
-        percent=part['width']/layout['width']*100
+        percent=column['width']/layout['width']*100
+        parts=''.join('<tr><td style="padding:0;font-size:0;line-height:0;">'+picture(part,part['alt'],part['href'] or web_url)+'</td></tr>' for part in column['parts'])
+        inner=f'<table {TABLE} width="{w}" style="width:100%;border-collapse:collapse;">'+parts+'</table>'
         footer_cells.append(f'<td width="{w}" valign="top" style="padding:0;width:{percent:.6f}%;font-size:0;line-height:0;">'+
-                            picture(part,part['alt'],part['href'] or web_url)+'</td>')
+                            inner+'</td>')
     footer=f'<table {TABLE} width="680" style="width:100%;table-layout:fixed;border-collapse:collapse;"><tr>'+''.join(footer_cells)+'</tr></table>'
     email=(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
            f'<title>{html.escape(company)} · {html.escape(month)} Raindrop</title>'

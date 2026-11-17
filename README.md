@@ -1,6 +1,6 @@
 # Rainmaker Raindrops
 
-Rainmaker Securities’ monthly company feature. Each month has an original web layout and two delivery formats: an interactive web edition with a one-page PDF, and a separate email-safe edition that preserves the original composition as linked PNG artwork.
+Rainmaker Securities’ monthly company feature. Each month has an original web layout and two delivery formats: an interactive web edition with a one-page PDF, and a separate email-safe edition that preserves the normal browser composition as linked PNG artwork.
 
 Open [index.html](index.html) for links to every local edition, public Anduril page, and project guideline. Ramp email links are marked as earlier drafts.
 
@@ -43,7 +43,7 @@ Read [the main guidelines](mainguidelines/README.md) for the full workflow. New 
 ./stage.sh
 ```
 
-Open `<issue>/raindrop.html` for the normal edition, `<issue>/raindrop.pdf` for print, and `<issue>/email/preview.html` for a local email review with local images. Import `<issue>/email/raindrop-email.html` into the email platform; it uses absolute HTTPS image URLs. Its images must be deployed before a test send. The email preserves the original one-page composition and scales it proportionally. Visible text is part of the artwork; the text file is its accessible companion.
+Open `<issue>/raindrop.html` for the normal edition, `<issue>/raindrop.pdf` for print, and `<issue>/email/preview.html` for a local email review with local images. Import `<issue>/email/raindrop-email.html` into the email platform; it uses absolute HTTPS image URLs. Its images must be deployed before a test send. The email preserves the normal desktop browser composition, including its screen typography and stacked footer buttons, and scales it proportionally. The PDF layout is a separate print design and is not the email reference. Visible text is part of the artwork; the text file is its accessible companion.
 
 `EMAIL_ASSET_BASE=https://cdn.example.com/raindrops ./render.sh <issue>` changes the email image host. Upload the generated `<issue>/email/assets/` under the same issue path on that host. The default host is the existing GitHub Pages site, pending any production CDN choice.
 
