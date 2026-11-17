@@ -11,7 +11,7 @@ Shared brand/tone rules and Anduril-specific precedent. For folder layout and cu
 - Colors come from the exchange's CSS: page `#eef5fb`, ink `#1b1f24`, navy `#10305f`,
   deepest navy `#061530` for the company name and big numbers, gold `#b48a2f` / `#d4af37`.
   No beige or cream anywhere.
-- Web font: Jost (Google Fonts), a free match for Futura PT. Email uses Arial, Helvetica, sans-serif; logo artwork is rasterized.
+- Web font: bundled Jost, originally from Google Fonts, a free match for Futura PT. Required weights live in `brand/fonts/` and must load before artwork capture. The email preserves this font in PNG artwork, with no font-loading dependency in the message.
 - Shared logos live in `brand/`. Company-specific assets live in the month's `assets/`.
 
 ## The raindrop

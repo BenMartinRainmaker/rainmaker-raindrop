@@ -5,6 +5,7 @@ The email uses linked PNG sections, presentation tables, and a plain-text compan
 """
 import argparse
 import html
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -36,9 +37,10 @@ def build_email(folder,asset_base=HOST):
     def picture(part,alt,url):
         w=round(part['width']*ratio)
         h=round(part['height']*ratio)
+        version=hashlib.sha256((out/'assets'/part['file']).read_bytes()).hexdigest()[:12]
         return (f'<a href="{html.escape(url,quote=True)}" style="text-decoration:none;">'
-                f'<img src="{asset_url}{part["file"]}" width="{w}" height="{h}" border="0" '
-                f'alt="{html.escape(alt,quote=True)}" style="display:block;border:0;width:100%;height:auto;max-width:{w}px;"></a>')
+                f'<img src="{asset_url}{part["file"]}?v={version}" width="{w}" height="{h}" border="0" '
+                f'alt="{html.escape(alt,quote=True)}" class="email-artwork" style="display:block;border:0;width:100%;height:auto;max-width:{w}px;"></a>')
     bands=''.join('<tr><td style="padding:0;font-size:0;line-height:0;">'+
                   picture(band,f'{company} · {month} Raindrop, section {i+1}. View the full accessible web edition.',web_url)+
                   '</td></tr>' for i,band in enumerate(layout['bands']))
@@ -52,11 +54,12 @@ def build_email(folder,asset_base=HOST):
                             picture(part,part['alt'],part['href'] or web_url)+'</td>')
     footer=f'<table {TABLE} width="680" style="width:100%;table-layout:fixed;border-collapse:collapse;"><tr>'+''.join(footer_cells)+'</tr></table>'
     email=(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-           f'<title>{html.escape(company)} · {html.escape(month)} Raindrop</title></head>'
+           f'<title>{html.escape(company)} · {html.escape(month)} Raindrop</title>'
+           '<style>@media screen and (min-width:900px){.email-page{max-width:1280px!important}.email-artwork{max-width:none!important}}</style></head>'
            '<body style="margin:0;padding:0;background-color:#dfe7ef;">'
            f'<table {TABLE} width="100%" style="width:100%;border-collapse:collapse;"><tr><td align="center" style="padding:0;">'
            '<!--[if mso]><table role="presentation" width="680" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->'
-           f'<table {TABLE} width="680" align="center" style="width:100%;max-width:680px;table-layout:fixed;border-collapse:collapse;background-color:#eef5fb;">'+
+           f'<table {TABLE} width="680" align="center" class="email-page" style="width:100%;max-width:680px;table-layout:fixed;border-collapse:collapse;background-color:#eef5fb;">'+
            bands+'<tr><td style="padding:0;font-size:0;line-height:0;">'+footer+'</td></tr></table>'
            '<!--[if mso]></td></tr></table><![endif]--></td></tr></table></body></html>')
     validate_email(email)
@@ -97,7 +100,7 @@ def validate_email(email):
             if tag == 'img':
                 if not a.get('src','').startswith('https://') or any(k not in a for k in ('width','height','border','alt')):
                     raise ValueError('Image needs HTTPS URL, dimensions, border, and alt text')
-                if not a['src'].endswith('.png'):
+                if not urlsplit(a['src']).path.endswith('.png'):
                     raise ValueError('Email images must be PNG')
     Check().feed(email)
     for pattern in (r'display\s*:\s*(?:grid|flex)',r'var\(',r'position\s*:',r'object-fit',r'@page',r'@media\s+print',r'localStorage',r'content-md',r'edit-cfg',r'gradient\(',r'\d(?:d?vh|in)\b'):

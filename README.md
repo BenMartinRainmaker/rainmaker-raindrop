@@ -2,6 +2,8 @@
 
 Rainmaker Securities’ monthly company feature. Each month has an original web layout and two delivery formats: an interactive web edition with a one-page PDF, and a separate email-safe edition that preserves the original composition as linked PNG artwork.
 
+Open [index.html](index.html) for links to every local edition, public Anduril page, and project guideline. Ramp email links are marked as earlier drafts.
+
 ## Project map
 
 ```text

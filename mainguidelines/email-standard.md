@@ -6,7 +6,7 @@ Ben’s November 17 correction takes precedence over the earlier live-text newsl
 
 ## Visual-match implementation
 
-`render_email_artwork.mjs` opens the normal edition in Chrome with its existing print styles and fonts. It captures contiguous PNG sections of that original Letter-page composition at twice the source pixel resolution. No image generation or restyling takes place. Section boundaries share the same pixel grid, so the artwork reassembles without gaps or overlaps.
+`render_email_artwork.mjs` opens the normal edition in Chrome with its existing print styles and fonts. It captures contiguous PNG sections of that original Letter-page composition at four times the source pixel resolution. No image generation or restyling takes place. Section boundaries share the same pixel grid, so the artwork reassembles without gaps or overlaps.
 
 `build_email.py` places those sections in a 680px fluid presentation table. Main artwork links to the full web edition. The footer is split into aligned cells so the original Trade on Rainmaker X and Visit Rainmaker Securities buttons retain their direct links. All other visible source and gallery links are reached through the web edition. No image map, overlay, JavaScript, SVG, CSS layout system, custom font request, gradient, or print CSS is delivered in email.
 
@@ -27,3 +27,9 @@ Mandatory visual QA: use vision-based inspection of actual rendered screenshots 
 Validate the HTML, inspect desktop and phone previews, and verify direct CTA destinations. Compare the assembled email to the source print composition, not to the retired newsletter layout. The exact artwork is retained, although final display scaling and image-loading behavior depend on the email client.
 
 Deploy images before a test send. The existing GitHub Pages host remains the default; `EMAIL_ASSET_BASE` supports a Rainmaker-approved HTTPS CDN. Actual Outlook/Gmail test sends remain the final delivery check. Rendering and staging never send email.
+
+## Fonts and browser sizing
+
+The normal edition and captured artwork must use the bundled Jost font files in `brand/fonts/`. Load and verify normal 400/500/600/700 and italic 400 before capture; fail the build if a font is unavailable. Do not rely on external font-loading timing. The delivered email still contains PNG artwork and no web fonts.
+
+The base presentation table and Outlook wrapper remain 680px. A progressive screen media query lets browser windows at least 900px wide display the same artwork up to 1280px wide, matching the normal edition’s desktop scale. Inside an email container it remains fluid to its available width; without the query it stays at 680px. PNGs use content hashes in their URLs so new artwork does not reuse a stale browser cache.

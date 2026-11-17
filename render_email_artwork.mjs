@@ -37,13 +37,21 @@ try {
     const id=++next;pending.set(id,{ok,fail});socket.send(JSON.stringify({id,method,params}));
   });
   await call('Page.enable');
-  await call('Emulation.setDeviceMetricsOverride',{width:816,height:1056,deviceScaleFactor:2,mobile:false});
+  await call('Emulation.setDeviceMetricsOverride',{width:816,height:1056,deviceScaleFactor:4,mobile:false});
   await call('Emulation.setEmulatedMedia',{media:'print'});
   await call('Page.navigate',{url:pathToFileURL(join(issue,'raindrop.html')).href});
   await delay(500);
   const loaded=await call('Runtime.evaluate',{
-    expression:`(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));return [...document.images].filter(i=>!i.naturalWidth).map(i=>i.src)})()`,awaitPromise:true,returnByValue:true
+    expression:`(async()=>{
+      const specs=['400 16px Jost','500 16px Jost','600 16px Jost','700 16px Jost','italic 400 16px Jost'];
+      for(const spec of specs){const faces=await document.fonts.load(spec);if(!faces.length||faces.some(f=>f.status!=='loaded'))throw Error('Required font did not load: '+spec);}
+      await document.fonts.ready;
+      await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));
+      await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+      return [...document.images].filter(i=>!i.naturalWidth).map(i=>i.src);
+    })()`,awaitPromise:true,returnByValue:true
   });
+  if(loaded.exceptionDetails) throw Error('Font/image preparation failed: '+JSON.stringify(loaded.exceptionDetails));
   if(loaded.result.value.length) throw Error('Broken source images: '+loaded.result.value.join(', '));
   const measure=await call('Runtime.evaluate',{returnByValue:true,expression:`(()=>{
     const page=document.querySelector('.page').getBoundingClientRect();
@@ -55,7 +63,7 @@ try {
   const layout=measure.result.value;
   if(Math.abs(layout.width-816)>1||layout.height>1057) throw Error('Original must be one Letter page: '+JSON.stringify(layout));
   // Snap all section boundaries to the same physical pixel grid. No gaps or overlaps.
-  const snap=n=>Math.round(n*2)/2;
+  const snap=n=>Math.round(n*4)/4;
   layout.starts=layout.starts.map(snap);
   const capture=async(file,x,y,width,height)=>{
     const shot=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip:{x:layout.x+x,y:layout.y+y,width,height,scale:1}});

@@ -9,3 +9,5 @@ Generated normal outputs are `raindrop.html`, `raindrop.pdf`, and `preview.png`.
 Shared guidance lives in `mainguidelines/`, shared brand assets in `brand/`, and build/staging tools in the root. `issue_dirs.py` lists canonical month folders and their nested versions; both CI and staging use that inventory.
 
 `url-aliases.json` maps old public paths to canonical sources. Staging emits pages, assets, email files, and PDFs at both paths. Browser editing at an alias writes to the canonical content path. Do not create duplicate editable source folders to preserve an old URL. The site root selects the newest main month, not a content version.
+
+Root `index.html` is the local project links page. It includes both Anduril content options in normal/email formats, Ramp’s local normal draft and earlier email draft, PDFs, and guidelines. It is separate from the hosted site root, which retains its newest-issue redirect.

@@ -12,3 +12,4 @@ __pycache__/
 
 # Generated email markup, raster assets, and local previews
 **/email/
+**/assets/jost-*.ttf

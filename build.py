@@ -5,7 +5,7 @@ Usage:  python3 build.py 2026-11-anduril
 Edit words in content.md; use an issue-specific template.html for each month’s original design.
 Run by render.sh automatically whenever content.md exists.
 """
-import html, re, sys, os, math
+import html, re, sys, os, math, shutil
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -334,6 +334,17 @@ def build(folder):
     missing = [k for k in re.findall(r"\{\{(\w+)\}\}", tpl) if k not in v]
     if missing:
         sys.exit("template.html has placeholders the builder does not know: %s" % missing)
+    # Bundle the exact weights: artwork capture must never depend on Google Fonts timing.
+    font_css, preloads = [], []
+    for style, weight in [("normal", 400), ("normal", 500), ("normal", 600), ("normal", 700), ("italic", 400)]:
+        name = "jost-%s%s.ttf" % ("italic-" if style == "italic" else "", weight)
+        source = os.path.join(ROOT, "brand", "fonts", name)
+        target = os.path.join(ROOT, folder, "assets", name)
+        shutil.copyfile(source, target)
+        font_css.append("@font-face{font-family:Jost;font-style:%s;font-weight:%s;font-display:block;src:url('assets/%s') format('truetype');}" % (style, weight, name))
+        preloads.append('<link rel="preload" href="assets/%s" as="font" type="font/ttf" crossorigin>' % name)
+    out = re.sub(r'<link\b[^>]*href="https://fonts.googleapis.com/[^>]+>', "", out)
+    out = out.replace('</head>', '\n'.join(preloads) + '<style>' + ''.join(font_css) + '</style></head>')
     with open(os.path.join(ROOT, folder, "raindrop.html"), "w", encoding="utf-8") as f:
         f.write(out)
     print("built %s/raindrop.html from content.md" % folder)
