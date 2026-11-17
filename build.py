@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Builds <month>/raindrop.html from <month>/content.md and the shared template.html.
 
-Usage:  python3 build.py 2026-10-anduril
-Edit the words in content.md; the design lives in template.html and never needs touching.
+Usage:  python3 build.py 2026-11-anduril
+Edit words in content.md; use an issue-specific template.html for each month’s original design.
 Run by render.sh automatically whenever content.md exists.
 """
 import html, re, sys, os, math
@@ -326,7 +326,10 @@ def build(folder):
     s = sec("Footer")
     v["footer"] = '<span%s>%s</span>' % (text_range(s), inline(" ".join(l.strip() for l in s["lines"] if l.strip())))
 
-    tpl = open(os.path.join(ROOT, "template.html"), encoding="utf-8").read()
+    template_path = os.path.join(ROOT, folder, "template.html")
+    if not os.path.isfile(template_path):
+        template_path = os.path.join(ROOT, "template.html")
+    tpl = open(template_path, encoding="utf-8").read()
     out = re.sub(r"\{\{(\w+)\}\}", lambda m: v.get(m.group(1), ""), tpl)
     missing = [k for k in re.findall(r"\{\{(\w+)\}\}", tpl) if k not in v]
     if missing:

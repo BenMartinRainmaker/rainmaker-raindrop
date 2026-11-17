@@ -17,11 +17,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Render every month (page, PDF, preview, share copy)
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Render every issue and version (web, PDF, share, email)
         run: |
-          for d in $(ls -d 20*-*/ | sed 's#/$##' | sort); do
-            ./render.sh "$d" || echo "::warning title=$d::PDF is longer than one printed page. Trim text in content.md."
-          done
+          while IFS= read -r d; do
+            ./render.sh "$d"
+          done < <(python3 issue_dirs.py)
       - name: Stage the website folder
         run: ./stage.sh
       - uses: actions/configure-pages@v5

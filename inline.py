@@ -21,7 +21,8 @@ out = re.sub(r"url\((['\"]?)(assets/[^'\")]+)\1\)",
              lambda m: 'url("data:%s;base64,%s")' % (mimetypes.guess_type(m.group(2))[0],
                  base64.b64encode(open(os.path.join(folder, m.group(2)), 'rb').read()).decode()), out)
 os.makedirs(os.path.join(folder, 'share'), exist_ok=True)
-dest = os.path.join(folder, 'share', f'Rainmaker-Raindrop-{folder}.html')
+slug = folder.replace('/', '-')
+dest = os.path.join(folder, 'share', f'Rainmaker-Raindrop-{slug}.html')
 open(dest, 'w', encoding='utf-8').write(out)
 left = re.findall(r'(?:src|href)="assets/[^"]+"', out)
 print(f'{dest}: {os.path.getsize(dest)//1024} KB, {len(left)} unresolved asset refs')
